@@ -13,7 +13,7 @@ jobs:
       - checkout
       - run:
           name: Lint Project
-          command: npm lint
+          command: npm run lint
   
   test-project:
     executor: node-executor
@@ -21,11 +21,18 @@ jobs:
       - checkout
       - run:
           name: Test Project
-          command: npm test
+          command: npm run test
 
 workflows:
   test-lint-project:
     jobs:
-      - lint-project
-      - test-project
-  
+      - lint-project:
+          filters:
+            branches:
+              ignore:
+                - /main/
+      - test-project:
+          filters:
+            branches:
+              ignore:
+                - /main/
