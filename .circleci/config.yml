@@ -16,7 +16,9 @@ jobs:
       - node/install
       - run:
           name: Lint Project
-          command: npm run lint
+          command: >
+            npm install
+            npm run lint
   
   test-project:
     executor: node-executor
@@ -25,7 +27,9 @@ jobs:
       - node/install
       - run:
           name: Test Project
-          command: npm run test
+          command: >
+            npm install 
+            npm run test
 
 workflows:
   test-lint-project:
