@@ -5,12 +5,15 @@ executors:
     working_directory: ~/vendor-contract-mgmt-client
     docker:
       - image: cimg/node:17.2.0
+orbs:
+  node: circleci/node@5.0.2
 
 jobs:
   lint-project:
     executor: node-executor
     steps:
       - checkout
+      - node/install
       - run:
           name: Lint Project
           command: npm run lint
@@ -19,6 +22,7 @@ jobs:
     executor: node-executor
     steps:
       - checkout
+      - node/install
       - run:
           name: Test Project
           command: npm run test
