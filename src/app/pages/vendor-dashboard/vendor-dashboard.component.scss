@@ -1,0 +1,15 @@
+.example-sidenav {
+  display: fixed;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  background: rgba(104, 140, 203, 1);
+}
+
+.example-container {
+  position: absolute;
+  top: 60px;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+}
