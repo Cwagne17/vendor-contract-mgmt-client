@@ -8,9 +8,10 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnInit {
   title = 'vendor-contract-mgmt-client';
-  constructor(private router:Router) { }
+  
+  constructor(private router:Router) {}
+
   ngOnInit(): void {
-    console.log('Called ngOnInit method');
     this.router.navigate(['/vendor-dashboard']);
   }
 }

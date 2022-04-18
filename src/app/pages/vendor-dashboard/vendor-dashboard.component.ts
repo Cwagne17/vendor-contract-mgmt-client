@@ -9,12 +9,13 @@ import {ActivatedRoute} from '@angular/router';
 })
 export class VendorDashboardComponent implements OnInit {
   options!: FormGroup;
+
   constructor(fb: FormBuilder, private route: ActivatedRoute) {
-    this.options = fb.group({
-      bottom: 0,
-      fixed: true,
-      top: 0,
-    });
+    // this.options = fb.group({
+    //   bottom: 0,
+    //   fixed: true,
+    //   top: 0,
+    // });
    }
 
   ngOnInit(): void {
