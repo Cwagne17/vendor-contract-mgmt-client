@@ -7,11 +7,6 @@ export const routes: Routes = [
         loadChildren: () =>
             import('./pages/vendor-dashboard/vendor.module').then((m) => m.VendorModule),
     },
-    { 
-        path: '', 
-        loadChildren: () =>
-            import('./pages/vendor-dashboard/vendor.module').then((m) => m.VendorModule) 
-    },
     { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
