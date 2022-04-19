@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VendorDashboardComponent } from './vendor-dashboard.component';
 import { VendorFilterComponent } from './components/vendor-filter/vendor-filter.component';
@@ -30,6 +30,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatFormFieldModule,
+    MatInputModule,
     RouterModule.forChild([
       {
         path: '',
@@ -39,6 +41,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   ],
   exports: [
     RouterModule
-  ]
+  ],
+  schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 })
 export class VendorDashboardModule { }
