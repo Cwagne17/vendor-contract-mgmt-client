@@ -1,12 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-export const routes: Routes = [
-    {
-        path: 'vendor-dashboard',
-        loadChildren: () =>
-            import('./pages/vendor-dashboard/vendor.module').then((m) => m.VendorModule),
-    },
+const routes: Routes = [
+    { path: 'dashboard', loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule) },
+    { path: '', redirectTo: 'dashboard/vendor', pathMatch: 'full' },
     { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 
@@ -14,4 +11,4 @@ export const routes: Routes = [
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
 })
-export class VCMSRoutingModule {}
+export class AppRoutingModule {}

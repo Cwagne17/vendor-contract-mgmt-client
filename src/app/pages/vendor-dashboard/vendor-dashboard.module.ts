@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { VendorRoutingModule } from './vendor.routes';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -18,14 +18,22 @@ import { VendorRoutingModule } from './vendor.routes';
     VendorFormComponent
   ],
   imports: [
-    VendorRoutingModule,
     CommonModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: VendorDashboardComponent
+      }
+    ])
+  ],
+  exports: [
+    RouterModule
   ]
 })
-export class VendorModule { }
+export class VendorDashboardModule { }

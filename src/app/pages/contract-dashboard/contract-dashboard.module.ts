@@ -14,7 +14,7 @@ import { ContractDashboardComponent } from './contract-dashboard.component';
         path: '',
         component: ContractDashboardComponent
       },
-      { path: '**', redirectTo: 'contract-dashboard', pathMatch: 'full' }
+      { path: '**', redirectTo: 'contract', pathMatch: 'full' }
     ])
   ]
 })

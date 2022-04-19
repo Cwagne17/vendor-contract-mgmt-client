@@ -8,30 +8,24 @@
 </button>
 
 <div class="wrapper" *ngIf="panelExpanded">
-  <button >
+  <button>
     <i class="fas fa-arrow-left back"></i>Back
   </button>
   <div class="inner">
-    <a routerLink="vendor">
-      <div
-        class="link vendor"
-        [ngClass]="{ active: link?.includes('vendor') }"
-      >
+    <a routerLink="dashboard/vendor">
+      <div class="link vendor" [ngClass]="{ active: link?.includes('vendor') }">
         <i class="far fa-bookmark nav-icon"></i>
         <span class="title">Vendors</span>
       </div>
     </a>
-    <a routerLink="contracts">
-      <div class="link contracts" [ngClass]="{ active: link?.includes('contracts') }">
+    <a routerLink="contract">
+      <div class="link contract" [ngClass]="{ active: link?.includes('contract') }">
         <i class="far fa-users-cog nav-icon"></i>
         <span class="title">Contracts</span>
       </div>
     </a>
     <a routerLink="worktype">
-      <div
-        class="link worktype"
-        [ngClass]="{ active: link?.includes('worktype') }"
-      >
+      <div class="link worktype" [ngClass]="{ active: link?.includes('worktype') }">
         <i class="far fa-university nav-icon"></i>
         <span class="title">Worktype</span>
       </div>
