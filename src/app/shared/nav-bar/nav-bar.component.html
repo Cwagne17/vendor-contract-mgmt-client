@@ -1,0 +1,40 @@
+<button
+  class="bars"
+  *ngIf="innerWidth && innerWidth < 650"
+  (click)="panelExpanded = !panelExpanded"
+  [ngClass]="{ barsOut: panelExpanded }"
+>
+  <i class="fas fa-bars"></i>
+</button>
+
+<div class="wrapper" *ngIf="panelExpanded">
+  <button >
+    <i class="fas fa-arrow-left back"></i>Back
+  </button>
+  <div class="inner">
+    <a routerLink="vendor">
+      <div
+        class="link vendor"
+        [ngClass]="{ active: link?.includes('vendor') }"
+      >
+        <i class="far fa-bookmark nav-icon"></i>
+        <span class="title">Vendors</span>
+      </div>
+    </a>
+    <a routerLink="contracts">
+      <div class="link contracts" [ngClass]="{ active: link?.includes('contracts') }">
+        <i class="far fa-users-cog nav-icon"></i>
+        <span class="title">Contracts</span>
+      </div>
+    </a>
+    <a routerLink="worktype">
+      <div
+        class="link worktype"
+        [ngClass]="{ active: link?.includes('worktype') }"
+      >
+        <i class="far fa-university nav-icon"></i>
+        <span class="title">Worktype</span>
+      </div>
+    </a>
+  </div>
+</div>
