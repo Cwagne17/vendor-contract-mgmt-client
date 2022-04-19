@@ -6,7 +6,6 @@ import { AppRoutingModule } from './app.routes';
 import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -19,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     PagesModule,
     SharedModule,
     ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   schemas: [
