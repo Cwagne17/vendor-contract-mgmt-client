@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes, VCMSRoutingModule } from './app.routes';
 import { VendorModule } from './pages/vendor-dashboard/vendor.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { VendorModule } from './pages/vendor-dashboard/vendor.module';
     BrowserModule,
     VCMSRoutingModule,
     BrowserAnimationsModule,
-    VendorModule
+    VendorModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

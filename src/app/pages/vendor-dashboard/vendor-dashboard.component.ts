@@ -3,6 +3,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+
 
 
 @Component({
@@ -11,7 +13,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   styleUrls: ['./vendor-dashboard.component.scss']
 })
 export class VendorDashboardComponent implements OnInit {
-  value = 'Clear me';
+
   constructor(private route: ActivatedRoute) {
    }
 
