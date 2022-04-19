@@ -13,7 +13,7 @@ import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -38,9 +38,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     ])
   ],
   exports: [
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class VendorDashboardModule { }
