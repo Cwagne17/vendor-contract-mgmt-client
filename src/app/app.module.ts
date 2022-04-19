@@ -4,9 +4,9 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app.routes';
 import { PagesModule } from './pages/pages.module';
-import { VendorDashboardComponent } from './pages/vendor-dashboard/vendor-dashboard.component';
-import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { SharedModule } from './shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     BrowserAnimationsModule,
     PagesModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   schemas: [
