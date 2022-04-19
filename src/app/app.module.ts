@@ -7,6 +7,8 @@ import { PagesModule } from './pages/pages.module';
 import { VendorDashboardComponent } from './pages/vendor-dashboard/vendor-dashboard.component';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { SharedModule } from './shared/shared.module';
+import { VendorModule } from './pages/vendor-dashboard/vendor.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     PagesModule,
     SharedModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   schemas: [
