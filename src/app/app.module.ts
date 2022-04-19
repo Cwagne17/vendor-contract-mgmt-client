@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes, VCMSRoutingModule } from './app.routes';
 import { VendorModule } from './pages/vendor-dashboard/vendor.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     VendorModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

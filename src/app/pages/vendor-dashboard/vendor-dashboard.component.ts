@@ -4,6 +4,8 @@ import {ActivatedRoute} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 
 
 

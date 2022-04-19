@@ -1,18 +1,5 @@
-.example-sidenav {
-  display: fixed;
-  align-items: center;
-  justify-content: center;
-  width: 200px;
-  background: rgba(104, 140, 203, 1);
-}
-
-.example-container {
-  position: absolute;
-  top: 60px;
-  bottom: 60px;
-  left: 0;
-  right: 0;
-}
-.example-form-field {
-  width: 200px;
+@import "src/theme.scss";
+.example-container{
+  min-width: 1000px;
+  min-height: 75px;
 }
