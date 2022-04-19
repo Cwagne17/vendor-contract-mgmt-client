@@ -10,13 +10,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
-import { VendorRoutingModule } from './vendor.routes';
+import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
-
-
-
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -26,7 +23,6 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     SearchBarComponent
   ],
   imports: [
-    VendorRoutingModule,
     CommonModule,
     LayoutModule,
     MatToolbarModule,
@@ -34,10 +30,15 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule
+    RouterModule.forChild([
+      {
+        path: '',
+        component: VendorDashboardComponent
+      }
+    ])
+  ],
+  exports: [
+    RouterModule
   ]
 })
-export class VendorModule { }
+export class VendorDashboardModule { }

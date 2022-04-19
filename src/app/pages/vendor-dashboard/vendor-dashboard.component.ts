@@ -16,8 +16,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 })
 export class VendorDashboardComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) {
-   }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     console.log('Called ngOnInit method');

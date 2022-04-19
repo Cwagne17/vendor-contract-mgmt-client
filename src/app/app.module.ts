@@ -1,28 +1,27 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { routes, VCMSRoutingModule } from './app.routes';
-import { VendorModule } from './pages/vendor-dashboard/vendor.module';
+import { AppRoutingModule } from './app.routes';
+import { PagesModule } from './pages/pages.module';
+import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
-    VCMSRoutingModule,
     BrowserAnimationsModule,
-    VendorModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatFormFieldModule,
+    PagesModule
   ],
   providers: [],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA,
+    NO_ERRORS_SCHEMA
+  ],
   bootstrap: [AppComponent]
 })
 

@@ -7,11 +7,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'vendor-contract-mgmt-client';
   
-  constructor(private router:Router) {}
+  constructor(private router: Router) {}
 
-  ngOnInit(): void {
-    this.router.navigate(['/vendor-dashboard']);
-  }
+  ngOnInit() {}
 }
