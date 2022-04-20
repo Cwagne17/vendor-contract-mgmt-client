@@ -14,6 +14,8 @@ import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
+    MatChipsModule,
+    MatCheckboxModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
@@ -45,3 +49,5 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 })
 export class VendorDashboardModule { }
+
+
