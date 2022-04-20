@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -9,7 +11,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     NavBarComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FontAwesomeModule,
+    RouterModule
   ],
   exports: [
     NavBarComponent

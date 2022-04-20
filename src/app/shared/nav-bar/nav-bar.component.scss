@@ -43,6 +43,7 @@
       .nav-icon {
         width: 30px;
         padding-right: 10px;
+        color: map-get($palette-dark, "default")
       }
 
       &.active {
