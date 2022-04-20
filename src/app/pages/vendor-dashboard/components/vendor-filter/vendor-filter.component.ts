@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-export interface Vegetable {
-  name: string;
-}
+
 @Component({
   selector: 'app-vendor-filter',
   templateUrl: './vendor-filter.component.html',
