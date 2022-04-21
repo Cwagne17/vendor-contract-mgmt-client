@@ -5,65 +5,135 @@
             <div class="top-line">
                 <mat-form-field appearance="outline" class="vName">
                     <mat-label>Vendor Name</mat-label>
-                    <input matInput placeholder="Vendor Name">
+                    <input 
+                        matInput 
+                        placeholder="Vendor Name"
+                        (change)="change($event, 'vendor_name')"
+                        [required]="true"
+                        [value]="vendor.vendor_name"
+                        (blur)="change($event, 'vendor_name')"
+                    >
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="workType">
                     <mat-label>Work Type</mat-label>
-                    <input matInput placeholder="Work Type" required>
+                    <input 
+                        matInput 
+                        placeholder="Work Type"
+                        (change)="change($event, 'work_type')"
+                        [required]="true"
+                        [value]="vendor.work_type"
+                        (blur)="change($event, 'work_type')"
+                    >
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="selectionMethod">
                     <mat-label>Selection Method</mat-label>
-                    <input matInput placeholder="Selection Method">
+                    <input 
+                        matInput 
+                        placeholder="Selection Method"
+                        (change)="change($event, 'selection_method')"
+                        [required]="true"
+                        [value]="vendor.selection_method"
+                        (blur)="change($event, 'selection_method')"
+                    >
                 </mat-form-field>
              </div>
 
              <div class="line-two">
                 <mat-form-field appearance="outline" class="vPhone">
                     <mat-label>Vendor Phone Number</mat-label>
-                    <input matInput placeholder="Vendor Phone Number" required>
+                    <input 
+                        matInput 
+                        placeholder="Vendor Phone Number"
+                        (change)="change($event, 'vendor_phone')"
+                        [required]="true"
+                        [value]="vendor.vendor_phone"
+                        (blur)="change($event, 'vendor_phone')"
+                    >
                 </mat-form-field>
                 
                 <mat-form-field appearance="outline" class="vEmail">
                     <mat-label>Vendor Email</mat-label>
-                    <input matInput placeholder="Vendor Email" required> <br>
+                    <input 
+                        matInput 
+                        placeholder="Vendor Email"
+                        (change)="change($event, 'vendor_email')"
+                        [required]="true"
+                        [value]="vendor.vendor_email"
+                        (blur)="change($event, 'vendor_email')"
+                    >
                 </mat-form-field>
             </div>
             
             <div class="line-three">
                 <mat-form-field appearance="outline" class="cFname">
                     <mat-label>Contact First Name</mat-label>
-                    <input matInput placeholder="Contact First Name" required>
+                    <input 
+                        matInput 
+                        placeholder="Contract First Name"
+                        (change)="change($event, 'contact_fname')"
+                        [required]="true"
+                        [value]="vendor.contact_fname"
+                        (blur)="change($event, 'contact_fname')"
+                    >
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="cLname">
                     <mat-label>Contact Last Name</mat-label>
-                    <input matInput placeholder="Contact Last Name"> <br>
+                    <input 
+                        matInput 
+                        placeholder="Contract Last Name"
+                        (change)="change($event, 'contact_lname')"
+                        [required]="true"
+                        [value]="vendor.contact_lname"
+                        (blur)="change($event, 'contact_lname')"
+                    >
                 </mat-form-field>
             </div>
 
             <div class="line-four">
                 <mat-form-field appearance="outline" class="cNum">
                     <mat-label>Contact Phone Number</mat-label>
-                    <input matInput placeholder="Contact Phone Number">
+                    <input 
+                        matInput 
+                        placeholder="Contact Phone Number"
+                        (change)="change($event, 'contact_phone')"
+                        [required]="true"
+                        [value]="vendor.contact_phone"
+                        (blur)="change($event, 'contact_phone')"
+                    >
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="cEmail">
                     <mat-label>Contact Email</mat-label>
-                    <input matInput placeholder="Contact Email" required> <br>
+                    <input 
+                        matInput 
+                        placeholder="Contact Email"
+                        (change)="change($event, 'contact_email')"
+                        [required]="true"
+                        [value]="vendor.contact_email"
+                        (blur)="change($event, 'contact_email')"
+                    >
                 </mat-form-field>
             </div>
 
             <div class="last-line">
                 <mat-form-field appearance="outline" class="memo-input">
                     <mat-label>Notes/Memo</mat-label>
-                    <input matInput placeholder="Notes/Memo" required>
+                    <input 
+                        matInput 
+                        placeholder="Notes/Memo"
+                        (change)="change($event, 'notes')"
+                        [required]="true"
+                        [value]="vendor.notes"
+                        (blur)="change($event, 'notes')"
+                    >
                 </mat-form-field>
             </div>
             
             <div class="button-row">
-                <button mat-flat-button color ="primary" type="submit">Create</button>
+                <button mat-flat-button color ="primary" type="submit" (click)="createVendor()">Create</button>
             </div>
         </form>
 
