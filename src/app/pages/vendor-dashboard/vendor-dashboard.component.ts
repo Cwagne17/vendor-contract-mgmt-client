@@ -7,6 +7,7 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialog} from '@angular/material/dialog';
 import { VendorFilterComponent } from './components/vendor-filter/vendor-filter.component';
+import { VendorFormComponent } from './components/vendor-form/vendor-form.component';
 //import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
@@ -24,8 +25,15 @@ export class VendorDashboardComponent implements OnInit {
   ngOnInit(): void {
     console.log('Called ngOnInit method');
   };
-  openDialog() {
+  openFilter() {
     const dialogRef = this.dialog.open(VendorFilterComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`)
+    });
+  }
+  openForm() {
+    const dialogRef = this.dialog.open(VendorFormComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`)
