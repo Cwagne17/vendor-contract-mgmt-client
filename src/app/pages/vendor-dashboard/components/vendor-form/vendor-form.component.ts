@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { VendorFormService } from 'src/app/services/vendor-form.services';
 
 @Component({
   selector: 'app-vendor-form',
@@ -7,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendorFormComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: VendorFormService) { }
 
   ngOnInit(): void {
   }
 
 }
+

@@ -1,4 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {MatButtonModule} from '@angular/material/button';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+
+
+
 
 @Component({
   selector: 'app-vendor-dashboard',
@@ -7,9 +16,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VendorDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    console.log('Called ngOnInit method');
   }
-
 }

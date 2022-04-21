@@ -1,1 +1,163 @@
 /* You can add global styles to this file, and also import other style files */
+@import "vars";
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Ubuntu:wght@500;700&display=swap");
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+$vcms-client-theme: mat-light-theme(
+  (
+    color: (
+      primary: $palette-accent,
+      accent: $palette-gray,
+      warn: $palette-danger,
+    ),
+  )
+);
+@include angular-material-theme($vcms-client-theme);
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px; // set rem here for entire application
+  background: color-gray(7);
+  @include text--default();
+
+  * {
+    font-family: "Roboto", sans-serif;
+  }
+}
+
+a {
+  @include text--accent();
+  transition: all 0.1s ease;
+  text-decoration: none;
+  &:hover:not(:focus) {
+    color: color-accent("lighter");
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: "Ubuntu", sans-serif;
+  @include text--default();
+}
+
+h1 {
+  font-size: font-size(6);
+}
+
+h2 {
+  font-size: font-size(5);
+}
+
+h3 {
+  font-size: font-size(4);
+}
+
+h4 {
+  font-size: font-size(3);
+}
+
+h5 {
+  font-size: font-size(2);
+}
+
+h6 {
+  font-size: font-size(1);
+}
+
+//Basic style for a flexbox
+.flex-box {
+  display: flex;
+  width: 100%;
+  //Flex box row
+  &.row {
+    flex-direction: row;
+    vertical-align: middle;
+    //Space between
+    &.sb {
+      justify-content: space-between;
+    }
+    &.center {
+      justify-content: center;
+    }
+  }
+  //Flex box column
+  &.col {
+    flex-direction: column;
+  }
+}
+
+.grid {
+  display: grid;
+
+  &.two-col {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+}
+
+.fill-height {
+  height: 100%;
+}
+
+.fill-view {
+  height: 100vh;
+}
+
+.inline-item {
+  display: inline-block;
+}
+
+.fa-spin {
+  animation: spin 0.6s linear infinite forwards;
+
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// Pop up custom view
+.mat-dialog-container {
+  border-radius: 2px;
+  box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.2);
+}
+
+.cdk-overlay-backdrop {
+  background-color: $dark-overlay;
+}
+
+.mat-snackbar {
+  color: color-gray(2);
+  border-radius: 0;
+  padding: 0 !important;
+  margin: 0;
+}

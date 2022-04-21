@@ -1,20 +1,70 @@
 <html>
     <body>
-
-        <h3>Vendor Name</h3>
-
+        <h3>Create Vendor</h3>
         <form>
-            <input type="text" id="vName" name="vName" placeholder="Vendor Name">
-            <input type="text" id="work_type" name="work_type" placeholder="Work Type" required> 
-            <input type="text" id="Selection_Method" name="Selection_Method" placeholder="Selection Method"> <br>
-            <input type="tel" id="phone_num" name="phone_num" placeholder="Vendor Phone Number"required>
-            <input type="email" id="email" name="email" placeholder="Vendor Email" required> <br>
-            <input type="text" id="fName" name="fName" placeholder="Contact First Name" required>
-            <input type="text" id="lName" name="lName" placeholder="Contact Last Name"> <br>
-            <input type="tel" id="cPhone_num" name="cPhone_num" placeholder="Contact Phone Number" >
-            <input type="email" id="cEmail" name="cEmail" placeholder="Contact Email"> <br>
-            <input type="text" id="memo" name="memo" placeholder="Notes/Memo"> <br>
-            <input type="submit" id="Create">
+            <div class="top-line">
+                <mat-form-field appearance="outline" class="vName">
+                    <mat-label>Vendor Name</mat-label>
+                    <input matInput placeholder="Vendor Name">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="workType">
+                    <mat-label>Work Type</mat-label>
+                    <input matInput placeholder="Work Type" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="selectionMethod">
+                    <mat-label>Selection Method</mat-label>
+                    <input matInput placeholder="Selection Method">
+                </mat-form-field>
+             </div>
+
+             <div class="line-two">
+                <mat-form-field appearance="outline" class="vPhone">
+                    <mat-label>Vendor Phone Number</mat-label>
+                    <input matInput placeholder="Vendor Phone Number" required>
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class="vEmail">
+                    <mat-label>Vendor Email</mat-label>
+                    <input matInput placeholder="Vendor Email" required> <br>
+                </mat-form-field>
+            </div>
+            
+            <div class="line-three">
+                <mat-form-field appearance="outline" class="cFname">
+                    <mat-label>Contact First Name</mat-label>
+                    <input matInput placeholder="Contact First Name" required>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="cLname">
+                    <mat-label>Contact Last Name</mat-label>
+                    <input matInput placeholder="Contact Last Name"> <br>
+                </mat-form-field>
+            </div>
+
+            <div class="line-four">
+                <mat-form-field appearance="outline" class="cNum">
+                    <mat-label>Contact Phone Number</mat-label>
+                    <input matInput placeholder="Contact Phone Number">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="cEmail">
+                    <mat-label>Contact Email</mat-label>
+                    <input matInput placeholder="Contact Email" required> <br>
+                </mat-form-field>
+            </div>
+
+            <div class="last-line">
+                <mat-form-field appearance="outline" class="memo-input">
+                    <mat-label>Notes/Memo</mat-label>
+                    <input matInput placeholder="Notes/Memo" required>
+                </mat-form-field>
+            </div>
+            
+            <div class="button-row">
+                <button mat-flat-button color ="primary" type="submit">Create</button>
+            </div>
         </form>
 
     </body>
