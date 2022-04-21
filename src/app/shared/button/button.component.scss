@@ -1,0 +1,169 @@
+@import "../../../vars";
+
+:host {
+  display: inline-block;
+
+  &.button--block {
+    display: block;
+
+    .button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+.button {
+  appearance: none;
+  position: relative;
+  border-radius: 4px;
+  padding: 12px 25px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Ubuntu", sans-serif;
+
+  display: flex;
+  align-items: center;
+
+  transition: all 0.1s ease;
+
+  .button__loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .button__content {
+    font-family: inherit;
+    opacity: 1;
+    transition: opacity 0.2s ease;
+  }
+}
+
+.button--block {
+  width: 100%;
+  justify-content: center;
+}
+
+.button--size-small {
+  font-size: 0.8rem;
+  padding: 8px 20px;
+}
+
+.button--size-large {
+  font-size: 1rem;
+  padding: 10px 30px;
+}
+
+.button--disabled {
+  pointer-events: none;
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+.button--loading {
+  pointer-events: none;
+
+  .button__content {
+    opacity: 0.3;
+  }
+}
+
+/////////////////////////
+// STYLE & TYPE MIXINS //
+/////////////////////////
+
+@mixin type($background, $hover, $border, $text, $shadow) {
+  background: $background;
+  border: 2px solid $border;
+  color: $text;
+
+  &.button--type-solid {
+    // inherit all default styles
+    box-shadow: 0px 10px 20px -15px $shadow;
+
+    &:hover {
+      border-color: $hover;
+      background: $hover;
+    }
+
+    &:active {
+      border-color: $background;
+      background: $background;
+      transform: scale(0.98);
+      box-shadow: 0px 5px 10px -7px $shadow;
+    }
+  }
+
+  &.button--type-link {
+    background: transparent;
+    border-color: transparent;
+    color: $background;
+
+    &:hover {
+      background: map-get($palette-gray, 6);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
+.button--style-primary {
+  @include type(
+    map-get($palette-accent, "default"),
+    map-get($palette-accent, "lighter"),
+    map-get($palette-accent, "default"),
+    white,
+    map-get($palette-accent, "default")
+  );
+}
+
+.button--style-danger {
+  @include type(
+    map-get($palette-danger, "default"),
+    map-get($palette-danger, "lighter"),
+    map-get($palette-danger, "default"),
+    white,
+    map-get($palette-danger, "default")
+  );
+}
+
+.button--style-success {
+  @include type(
+    map-get($palette-success, "default"),
+    map-get($palette-success, "lighter"),
+    map-get($palette-success, "default"),
+    white,
+    map-get($palette-success, "default")
+  );
+}
+
+.button--style-warning {
+  @include type(
+    map-get($palette-warning, "default"),
+    map-get($palette-warning, "lighter"),
+    map-get($palette-warning, "default"),
+    white,
+    map-get($palette-warning, "default")
+  );
+}
+
+.button--style-cancel {
+  @include type(
+    map-get($palette-gray, 7),
+    map-get($palette-gray, 5),
+    map-get($palette-gray, 3),
+    map-get($palette-accent, "default"),
+    map-get($palette-gray, 3)
+  );
+}
