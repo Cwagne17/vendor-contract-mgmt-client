@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app.routes';
 import { PagesModule } from './pages/pages.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { PagesModule } from './pages/pages.module';
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    PagesModule
+    PagesModule,
+    MatSnackBarModule
   ],
   bootstrap: [AppComponent]
 })
