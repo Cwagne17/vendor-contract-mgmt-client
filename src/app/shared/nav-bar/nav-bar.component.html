@@ -12,21 +12,21 @@
     <i class="fas fa-arrow-left back"></i>Back
   </button>
   <div class="inner">
-    <a routerLink="dashboard/vendor">
+    <a [routerLink]="['/dashboard/vendor']" >
       <div class="link vendor" [ngClass]="{ active: link?.includes('vendor') }">
-        <i class="far fa-bookmark nav-icon"></i>
+        <fa-icon [icon]="faAddressCard" class="nav-icon"></fa-icon>
         <span class="title">Vendors</span>
       </div>
     </a>
-    <a routerLink="contract">
+    <a [routerLink]="['/dashboard/contract']">
       <div class="link contract" [ngClass]="{ active: link?.includes('contract') }">
-        <i class="far fa-users-cog nav-icon"></i>
+        <fa-icon [icon]="faFileLines" class="nav-icon"></fa-icon>
         <span class="title">Contracts</span>
       </div>
     </a>
-    <a routerLink="worktype">
+    <a [routerLink]="['/dashboard/worktype']">
       <div class="link worktype" [ngClass]="{ active: link?.includes('worktype') }">
-        <i class="far fa-university nav-icon"></i>
+        <fa-icon [icon]="faFolder" class="nav-icon"></fa-icon>
         <span class="title">Worktype</span>
       </div>
     </a>
