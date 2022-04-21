@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDialogModule,
     RouterModule.forChild([
       {
         path: '',

@@ -5,9 +5,10 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
-
-
-
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { VendorFilterComponent } from './components/vendor-filter/vendor-filter.component';
+import { Inject } from '@angular/core';
+import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
 
 @Component({
   selector: 'app-vendor-dashboard',
@@ -16,9 +17,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 })
 export class VendorDashboardComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, @Inject(MatDialog)private dialogRef : MatDialog) {}
 
   ngOnInit(): void {
     console.log('Called ngOnInit method');
+  }
+  
+  openDialog(){
+    this.dialogRef.open(VendorFilterComponent)
   }
 }

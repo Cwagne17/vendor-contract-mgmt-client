@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app.routes';
 import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
-    PagesModule
+    PagesModule,
+    MatDialogModule
   ],
   providers: [],
   schemas: [
