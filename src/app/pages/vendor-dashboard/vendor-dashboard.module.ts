@@ -45,7 +45,6 @@ import { VendorFormService } from 'src/app/services/vendor-form.services';
   exports: [
     RouterModule
   ],
-  providers: [VendorFormService],
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 })
 export class VendorDashboardModule { }
