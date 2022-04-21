@@ -5,16 +5,39 @@
   To access these variables in another SCSS file, simply put `@import 'vars';` at the top.
 */
 
+$palette-main: (
+  "lightest": hsl(218, 49%, 74%),
+  "lighter": hsl(218, 49%, 54%),
+  "default": hsl(218, 49%, 44%),
+  "darker": hsl(218, 49%, 34%),
+  "darkest": hsl(218, 49%, 24%),
+);
+
+@function color-main($style: "default") {
+  @return map-get($palette-main, $style);
+}
+
 $palette-accent: (
-  "lightest": hsl(226, 43%, 74%),
-  "lighter": hsl(226, 43%, 54%),
-  "default": hsl(226, 43%, 44%),
-  "darker": hsl(226, 43%, 34%),
-  "darkest": hsl(226, 43%, 24%),
+  "lightest": hsl(20, 80%, 84%),
+  "lighter": hsl(20, 80%, 64%),
+  "default": hsl(20, 80%, 54%),
+  "darker": hsl(20, 80%, 44%),
+  "darkest": hsl(20, 80%, 34%),
 );
 
 @function color-accent($style: "default") {
   @return map-get($palette-accent, $style);
+}
+
+$palette-dark: (
+  "lightest": hsl(176, 20%, 46%),
+  "lighter": hsl(176, 20%, 26%),
+  "default": hsl(176, 20%, 16%),
+  "darker": hsl(176, 20%, 6%),
+);
+
+@function color-dark($style: "default") {
+  @return map-get($pallette-dark, $style);
 }
 
 $palette-success: (
