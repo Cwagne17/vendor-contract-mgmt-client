@@ -14,7 +14,6 @@ import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -35,7 +34,6 @@ import { SharedModule } from 'src/app/shared/shared.module';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule,
     RouterModule.forChild([
       {
         path: '',
