@@ -1,0 +1,114 @@
+@import "../../../vars";
+
+.wrapper {
+  width: 250px;
+  @media only screen and (max-width: 750px) {
+    width: 125px;
+    position: absolute;
+    z-index: 1;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
+  }
+  height: 100vh;
+  background-color: map-get($palette-main, "lightest");
+
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 20px;
+    font-size: font-size(1);
+    color: map-get($palette-dark, "darker");
+
+    .back {
+      padding-right: 10px;
+      font-size: font-size(1);
+      color: map-get($palette-main, "default");
+    }
+  }
+
+  .inner {
+    width: inherit;
+
+    .link {
+      padding: 20px 20px;
+      font-size: font-size(2);
+      @media only screen and (max-width: 750px) {
+        font-size: font-size(1);
+      }
+      .title {
+        font-weight: 1000;
+        color: map-get($palette-dark, "default");
+      }
+
+      .nav-icon {
+        width: 30px;
+        padding-right: 10px;
+        color: map-get($palette-dark, "default")
+      }
+
+      &.active {
+        background-color: map-get($palette-main, "default");
+
+        .nav-icon {
+          color: white;
+        }
+
+        .title {
+          color: white;
+        }
+      }
+    }
+
+    .link:hover,
+    .link:focus {
+      background-color: map-get($palette-main, "lighter");
+
+      .nav-icon {
+        color: white;
+      }
+
+      .title {
+        color: white;
+      }
+    }
+  }
+}
+.bars {
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  left: 0;
+  top: 0;
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background: color-gray(6);
+  margin: 10px 0 0 0;
+  padding: 10px;
+  font-size: font-size(2);
+  width: 40px;
+  height: 40px;
+  z-index: 2;
+
+}
+.barsOut {
+  left: 125px;
+}
+
+.author-link {
+  position: fixed;
+  bottom: 0;
+  margin: 20px;
+  text-align: center;
+  padding-left: 40px;
+  font-size: font-size(2);
+
+  .icon {
+    padding-bottom: 10px;
+    font-size: 30px;
+  }
+
+  .label {
+    color: map-get($palette-dark, "default");
+    font-weight: 1000;
+  }
+}

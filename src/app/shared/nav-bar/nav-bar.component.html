@@ -1,0 +1,34 @@
+<button
+  class="bars"
+  *ngIf="innerWidth && innerWidth < 650"
+  (click)="panelExpanded = !panelExpanded"
+  [ngClass]="{ barsOut: panelExpanded }"
+>
+  <i class="fas fa-bars"></i>
+</button>
+
+<div class="wrapper" *ngIf="panelExpanded">
+  <button>
+    <i class="fas fa-arrow-left back"></i>Back
+  </button>
+  <div class="inner">
+    <a [routerLink]="['/dashboard/vendor']" >
+      <div class="link vendor" [ngClass]="{ active: link?.includes('vendor') }">
+        <fa-icon [icon]="faAddressCard" class="nav-icon"></fa-icon>
+        <span class="title">Vendors</span>
+      </div>
+    </a>
+    <a [routerLink]="['/dashboard/contract']">
+      <div class="link contract" [ngClass]="{ active: link?.includes('contract') }">
+        <fa-icon [icon]="faFileLines" class="nav-icon"></fa-icon>
+        <span class="title">Contracts</span>
+      </div>
+    </a>
+    <a [routerLink]="['/dashboard/worktype']">
+      <div class="link worktype" [ngClass]="{ active: link?.includes('worktype') }">
+        <fa-icon [icon]="faFolder" class="nav-icon"></fa-icon>
+        <span class="title">Worktype</span>
+      </div>
+    </a>
+  </div>
+</div>

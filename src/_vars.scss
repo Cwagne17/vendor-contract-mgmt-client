@@ -1,0 +1,133 @@
+@use 'sass:list';
+
+/**
+  This file should contain ALL variable declarations used throughout the application.
+  To access these variables in another SCSS file, simply put `@import 'vars';` at the top.
+*/
+
+$palette-main: (
+  "lightest": hsl(218, 49%, 74%),
+  "lighter": hsl(218, 49%, 54%),
+  "default": hsl(218, 49%, 44%),
+  "darker": hsl(218, 49%, 34%),
+  "darkest": hsl(218, 49%, 24%),
+);
+
+@function color-main($style: "default") {
+  @return map-get($palette-main, $style);
+}
+
+$palette-accent: (
+  "lightest": hsl(20, 80%, 84%),
+  "lighter": hsl(20, 80%, 64%),
+  "default": hsl(20, 80%, 54%),
+  "darker": hsl(20, 80%, 44%),
+  "darkest": hsl(20, 80%, 34%),
+);
+
+@function color-accent($style: "default") {
+  @return map-get($palette-accent, $style);
+}
+
+$palette-dark: (
+  "lightest": hsl(176, 20%, 46%),
+  "lighter": hsl(176, 20%, 26%),
+  "default": hsl(176, 20%, 16%),
+  "darker": hsl(176, 20%, 6%),
+);
+
+@function color-dark($style: "default") {
+  @return map-get($pallette-dark, $style);
+}
+
+$palette-success: (
+  "lightest": hsl(139, 47%, 70%),
+  "lighter": hsl(139, 61%, 50%),
+  "default": hsl(139, 61%, 40%),
+  "darker": hsl(139, 61%, 30%),
+  "darkest": hsl(139, 61%, 10%),
+);
+
+@function color-success($style: "default") {
+  @return map-get($palette-success, $style);
+}
+
+$palette-danger: (
+  "lightest": hsl(5, 81%, 76%),
+  "lighter": hsl(5, 73%, 56%),
+  "default": hsl(5, 73%, 46%),
+  "darker": hsl(5, 73%, 36%),
+  "darkest": hsl(5, 73%, 16%),
+);
+
+@function color-danger($style: "default") {
+  @return map-get($palette-danger, $style);
+}
+
+$palette-warning: (
+  "lightest": hsl(38, 100%, 80%),
+  "lighter": hsl(38, 100%, 60%),
+  "default": hsl(38, 100%, 50%),
+  "darker": hsl(38, 100%, 40%),
+  "darkest": hsl(38, 100%, 20%),
+);
+
+@function color-warning($style: "default") {
+  @return map-get($palette-warning, $style);
+}
+
+$palette-gray: (
+  1: hsl(220, 13%, 14%),
+  2: hsl(222, 12%, 28%),
+  3: hsl(222, 12%, 42%),
+  4: hsl(222, 12%, 56%),
+  5: hsl(221, 12%, 70%),
+  6: hsl(220, 12%, 90%),
+  7: hsl(0, 0%, 100%),
+);
+
+$dark-overlay: rgba(0, 0, 0, 0.4);
+
+@function color-gray($style: 2) {
+  @return map-get($palette-gray, $style);
+}
+
+$palette-status: (
+  "warning": map-get($palette-warning, "default"),
+  "released": map-get($palette-success, "default"),
+  "invalid": map-get($palette-danger, "default"),
+);
+
+$font-size-ratio: 1.151;
+$font-size: (
+  calc(1rem / (#{$font-size-ratio} * 2)),
+  calc(1rem / (#{$font-size-ratio} * 1)),
+  1rem,
+  calc(1rem * (#{$font-size-ratio} * 1)),
+  calc(1rem * (#{$font-size-ratio} * 2)),
+  calc(1rem * (#{$font-size-ratio} * 3)),
+  calc(1rem * (#{$font-size-ratio} * 4)),
+  calc(1rem * (#{$font-size-ratio} * 5)),
+  calc(1rem * (#{$font-size-ratio} * 6))
+);
+
+@function font-size($size: 1) {
+  @return list.nth($font-size, $size + 2);
+}
+
+// mixins
+@mixin text--default() {
+  color: color-gray();
+}
+
+@mixin text--medium() {
+  color: color-gray(3);
+}
+
+@mixin text--light() {
+  color: color-gray(4);
+}
+
+@mixin text--accent() {
+  color: color-accent();
+}
