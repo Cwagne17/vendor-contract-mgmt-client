@@ -9,7 +9,7 @@
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.25);
   }
   height: 100vh;
-  background-color: map-get($palette-main, "lightest");
+  background-color: map-get($palette-gray, 6);
 
   button {
     background: none;
@@ -17,12 +17,12 @@
     padding: 0;
     margin: 20px;
     font-size: font-size(1);
-    color: map-get($palette-dark, "darker");
+    color: map-get($palette-gray, 3);
 
     .back {
       padding-right: 10px;
       font-size: font-size(1);
-      color: map-get($palette-main, "default");
+      color: map-get($palette-accent, "default");
     }
   }
 
@@ -37,17 +37,16 @@
       }
       .title {
         font-weight: 1000;
-        color: map-get($palette-dark, "default");
+        color: map-get($palette-gray, 2);
       }
 
       .nav-icon {
         width: 30px;
         padding-right: 10px;
-        color: map-get($palette-dark, "default")
       }
 
       &.active {
-        background-color: map-get($palette-main, "default");
+        background-color: map-get($palette-accent, "default");
 
         .nav-icon {
           color: white;
@@ -61,7 +60,7 @@
 
     .link:hover,
     .link:focus {
-      background-color: map-get($palette-main, "lighter");
+      background-color: map-get($palette-accent, "lighter");
 
       .nav-icon {
         color: white;
@@ -89,6 +88,7 @@
   height: 40px;
   z-index: 2;
 
+  color: map-get($palette-accent, "default");
 }
 .barsOut {
   left: 125px;
@@ -108,7 +108,7 @@
   }
 
   .label {
-    color: map-get($palette-dark, "default");
+    color: map-get($palette-gray, 2);
     font-weight: 1000;
   }
 }

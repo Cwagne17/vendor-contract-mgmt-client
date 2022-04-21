@@ -1,6 +1,5 @@
 import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { faAddressCard, faBriefcase, faFileLines, faFolder } from '@fortawesome/free-solid-svg-icons';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({
@@ -9,9 +8,6 @@ import { Subject, takeUntil } from 'rxjs';
   styleUrls: ['./nav-bar.component.scss']
 })
 export class NavBarComponent implements OnInit, OnDestroy {
-  faAddressCard = faAddressCard;
-  faFileLines = faFileLines;
-  faFolder = faFolder;
 
   @Input() link!: string;
   $destroy = new Subject<void>();
