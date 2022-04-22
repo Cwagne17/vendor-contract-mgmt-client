@@ -8,6 +8,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialog} from '@angular/material/dialog';
 import { VendorFilterComponent } from './components/vendor-filter/vendor-filter.component';
 import { VendorFormComponent } from './components/vendor-form/vendor-form.component';
+import {MatDialogModule} from '@angular/material/dialog';
+
 //import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 
@@ -33,9 +35,13 @@ export class VendorDashboardComponent implements OnInit {
     });
   }
   openForm() {
-    const dialogRef = this.dialog.open(VendorFormComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
+    const dialogRef2 = this.dialog.open(VendorFormComponent, {
+      height: '100%',
+      width: '50%',
+    });
+    dialogRef2.updatePosition({ top: '0px', left: `50%`});
+    //dialogRef2.updatePosition()
+    dialogRef2.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`)
     });
   }
