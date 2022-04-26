@@ -1,6 +1,6 @@
 <html>
     <body>
-        <h3>Create Vendor</h3>
+        <h3>{{formTitle}}</h3>
         <form>
             <div class="top-line">
                 <mat-form-field appearance="outline" class="vName">
@@ -10,6 +10,7 @@
                         placeholder="Vendor Name"
                         (change)="change($event, 'vendor_name')"
                         [required]="true"
+                        [disabled]="this.disableInput"
                         [value]="vendor.vendor_name"
                         (blur)="change($event, 'vendor_name')"
                     >
@@ -22,6 +23,7 @@
                         placeholder="Work Type"
                         (change)="change($event, 'work_type')"
                         [required]="true"
+                        [disabled]="this.disableInput"
                         [value]="vendor.work_type"
                         (blur)="change($event, 'work_type')"
                     >
@@ -34,6 +36,7 @@
                         placeholder="Selection Method"
                         (change)="change($event, 'selection_method')"
                         [required]="true"
+                        [disabled]="this.disableInput"
                         [value]="vendor.selection_method"
                         (blur)="change($event, 'selection_method')"
                     >
@@ -47,7 +50,8 @@
                         matInput 
                         placeholder="Vendor Phone Number"
                         (change)="change($event, 'vendor_phone')"
-                        [required]="true"
+                        [required]="false"
+                        [disabled]="this.disableInput"
                         [value]="vendor.vendor_phone"
                         (blur)="change($event, 'vendor_phone')"
                     >
@@ -59,7 +63,8 @@
                         matInput 
                         placeholder="Vendor Email"
                         (change)="change($event, 'vendor_email')"
-                        [required]="true"
+                        [required]="false"
+                        [disabled]="this.disableInput"
                         [value]="vendor.vendor_email"
                         (blur)="change($event, 'vendor_email')"
                     >
@@ -74,6 +79,7 @@
                         placeholder="Contract First Name"
                         (change)="change($event, 'contact_fname')"
                         [required]="true"
+                        [disabled]="this.disableInput"
                         [value]="vendor.contact_fname"
                         (blur)="change($event, 'contact_fname')"
                     >
@@ -86,6 +92,7 @@
                         placeholder="Contract Last Name"
                         (change)="change($event, 'contact_lname')"
                         [required]="true"
+                        [disabled]="this.disableInput"
                         [value]="vendor.contact_lname"
                         (blur)="change($event, 'contact_lname')"
                     >
@@ -100,6 +107,7 @@
                         placeholder="Contact Phone Number"
                         (change)="change($event, 'contact_phone')"
                         [required]="true"
+                        [disabled]="this.disableInput"
                         [value]="vendor.contact_phone"
                         (blur)="change($event, 'contact_phone')"
                     >
@@ -112,6 +120,7 @@
                         placeholder="Contact Email"
                         (change)="change($event, 'contact_email')"
                         [required]="true"
+                        [disabled]="this.disableInput"
                         [value]="vendor.contact_email"
                         (blur)="change($event, 'contact_email')"
                     >
@@ -125,15 +134,16 @@
                         matInput 
                         placeholder="Notes/Memo"
                         (change)="change($event, 'notes')"
-                        [required]="true"
+                        [required]="false"
+                        [disabled]="this.disableInput"
                         [value]="vendor.notes"
                         (blur)="change($event, 'notes')"
                     >
                 </mat-form-field>
             </div>
             
-            <div class="button-row">
-                <button mat-flat-button color ="primary" type="submit" (click)="createVendor()">Create</button>
+            <div class="button-row" *ngIf="!this.disableInput">
+                <button mat-flat-button color ="primary" type="submit" (click)="vendorAction()">{{ this.formTitle }}</button>
             </div>
         </form>
 

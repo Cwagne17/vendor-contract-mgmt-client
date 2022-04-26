@@ -11,6 +11,10 @@ import { IVendor } from '../../../../types/ivendor';
 })
 export class VendorFormComponent implements OnInit {
 
+  type: string = "create";
+  formTitle: string = "Vendor Details";
+  disableInput: boolean = true;
+  
   vendor: IVendor = {
     vendor_name: '',
     work_type: '',
@@ -28,10 +32,31 @@ export class VendorFormComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    switch(this.type){
+      case "create":
+        this.formTitle = "Create Vendor";
+        this.disableInput = false;
+        break;
+      case "update":
+        this.formTitle = "Create Vendor";
+        this.disableInput = false;
+        break;
+      default:
+        break;
+    }
+    console.log(this.formTitle);
   }
 
-  createVendor() {
-    console.log(this.vendor);
+  vendorAction() {
+    switch(this.type){
+      case "create":
+        console.log("create", this.vendor);
+        break;
+      case "update":
+        console.log("create", this.vendor);
+        break;
+    }
   }
 
   change(event: any, property: string) {
