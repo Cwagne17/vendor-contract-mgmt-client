@@ -10,7 +10,6 @@ import { VENDOR_ROUTES } from 'src/environments/routes';
 })
 export class VendorService implements IVendorService {
 
-  private headers = new HttpHeaders(); 
   constructor(private http: HttpClient) { }
 
   createVendor(createVendorDto: any): Promise<void> {

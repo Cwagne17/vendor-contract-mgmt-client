@@ -5,6 +5,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { VendorService } from '../../services/vendor.service';
 
 
 
@@ -16,10 +17,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class VendorDashboardComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private vendorService: VendorService) {}
 
-  ngOnInit(): void {
-    console.log('Called ngOnInit method');
+  async ngOnInit(): Promise<void> {
+    this.vendorService.searchVendors({}).then((vendors: any) => {
+      console.log(vendors);
+    });
+
   };
   //openFilter(): void {
   //  const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
