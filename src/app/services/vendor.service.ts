@@ -3,7 +3,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { IVendorService } from './interfaces/ivendor.service';
 import * as querystring from 'query-string';
 import { retry } from 'rxjs';
-import { VENDOR_ROUTES } from 'src/environments/routes';
+import { VENDOR_ROUTES } from '../../environments/routes';
+import {CreateVendorDto, SearchVendorsDto, UpdateVendorDto, Vendor} from '../types/vendor';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class VendorService implements IVendorService {
 
   constructor(private http: HttpClient) { }
 
-  createVendor(createVendorDto: any): Promise<void> {
+  createVendor(createVendorDto: CreateVendorDto): Promise<void> {
     return new Promise((resolve, reject) => {
       this.http
       .post(
@@ -29,7 +30,7 @@ export class VendorService implements IVendorService {
     });
   }
 
-  updateVendor(id: string, updateVendorDto: any): Promise<void> {
+  updateVendor(id: string, updateVendorDto: UpdateVendorDto): Promise<void> {
     return new Promise((resolve, reject) => {
       this.http
       .patch(
@@ -46,7 +47,7 @@ export class VendorService implements IVendorService {
     });
   }
 
-  searchVendors(query: any): Promise<any> {
+  searchVendors(query: SearchVendorsDto): Promise<Vendor[]> {
     return new Promise((resolve, reject) => {
       this.http
         .get(VENDOR_ROUTES.SEARCH_VENDORS(query))
