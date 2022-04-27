@@ -1,27 +1,34 @@
 
 <p style="font-size: 30px;" id="SIc"> Status</p>
-<mat-checkbox color="primary" class="CheckBox"></mat-checkbox>
-<p style="font-size: 15px;">status 1</p>
-<mat-checkbox color="primary" class="CheckBox"></mat-checkbox>
-<p style="font-size: 15px;">status 2</p>
-<mat-checkbox color="primary" class="CheckBox"></mat-checkbox>
-<p style="font-size: 15px;">status 3</p>
+<mat-checkbox color="primary" class="CheckBox" (change)="checBoxChange($event.checked, 'inContract')">In Contract</mat-checkbox>
+
+<mat-checkbox color="primary" class="CheckBox" (change)="checBoxChange($event.checked, 'Active')">Active</mat-checkbox>
+
+<mat-checkbox color="primary" class="CheckBox" (change)="checBoxChange($event.checked, 'Inactive')">Inactive</mat-checkbox>
+
+<mat-checkbox color="primary" class="CheckBox" (change)="checBoxChange($event.checked, 'hasIssues')">Has Issues</mat-checkbox>
 
 <hr>
-<p style="font-size: 30px;">Work Types
-    <mat-form-field appearance="outline" style="width: 60vw; font-size: 12px;">
-    <input matInput>
-        <mat-chip-list aria-label="Work Type Selector" class="chips">
-            <mat-chip>words</mat-chip>
-        </mat-chip-list>
-        <mat-chip-list aria-label="Work Type Selector" class="chips">
-            <mat-chip>words</mat-chip>
-        </mat-chip-list>
-    </mat-form-field> 
-</p>
+<mat-form-field class="WorkType" appearance="fill" >
+    <mat-label>Work Types</mat-label>
+    <mat-chip-list #chipList >
+      <mat-chip *ngFor="let item of workTypes" (removed)="remove(item)">
+        {{item.name}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input placeholder="New work type..."
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+  </mat-form-field>
+
 <hr>
-<button mat-button style="font-size: 20px;" color="primary">Clear</button>
-<button mat-button style="font-size: 20px; float: right;" color="primary">Cancel</button>
-<button mat-button style="font-size: 20px; float: right;"  color="primary">Apply</button>
+<button mat-button style="font-size: 20px;" color="primary" (click)="filterClear()">Clear</button>
+<button mat-button style="font-size: 20px; float: right;" color="primary" mat-dialog-close>Cancel</button>
+<button mat-button style="font-size: 20px; float: right;"  color="primary" (click)="filterApply()" mat-dialog-close>Apply</button>
 
 

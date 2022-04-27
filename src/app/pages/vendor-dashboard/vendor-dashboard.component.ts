@@ -24,6 +24,13 @@ export class VendorDashboardComponent implements OnInit {
   }
   
   openDialog(){
-    this.dialogRef.open(VendorFilterComponent)
+    this.dialogRef.open(VendorFilterComponent, {
+      height : '25vw',
+      width : '40vw'
+    });
+  }
+
+  pullInfo(){
+    
   }
 }
