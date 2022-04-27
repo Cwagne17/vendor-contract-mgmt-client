@@ -15,6 +15,8 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
+import { MatTableModule} from '@angular/material/table';
+
 @NgModule({
   declarations: [
     VendorDashboardComponent,
@@ -35,6 +37,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatTableModule,
     RouterModule.forChild([
       {
         path: '',

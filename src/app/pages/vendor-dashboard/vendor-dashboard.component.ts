@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
@@ -9,8 +9,27 @@ import {MatDialog} from '@angular/material/dialog';
 import { VendorFilterComponent } from './components/vendor-filter/vendor-filter.component';
 import { VendorFormComponent } from './components/vendor-form/vendor-form.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTable} from '@angular/material/table';
 
-//import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+export interface IVendor {
+ vendor_name: string;
+
+/*    first_name: string;
+
+    last_name: string;
+
+    selection_method: string;
+
+    */status?: string;
+
+    contact_phone_number: string;
+
+    //contact_email: string;
+
+    //memo?: string;
+
+    work_id: string;
+}
 
 
 
@@ -21,12 +40,20 @@ import {MatDialogModule} from '@angular/material/dialog';
   styleUrls: ['./vendor-dashboard.component.scss']
 })
 export class VendorDashboardComponent implements OnInit {
+  displayedColumns: string[] = ['vendor_name', 'contact_phone_number', 'status', 'work_id', 'butt'];
+  vendors: IVendor[] = [
+    {vendor_name: '',
+    contact_phone_number: '',
+    status:'',
+    work_id:'' }
+  ];
 
-  constructor(private route: ActivatedRoute, public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
     console.log('Called ngOnInit method');
   };
+
   openFilter() {
     const dialogRef = this.dialog.open(VendorFilterComponent);
 
@@ -34,6 +61,7 @@ export class VendorDashboardComponent implements OnInit {
       console.log(`Dialog result: ${result}`)
     });
   }
+
   openForm() {
     const dialogRef2 = this.dialog.open(VendorFormComponent, {
       height: '100%',
