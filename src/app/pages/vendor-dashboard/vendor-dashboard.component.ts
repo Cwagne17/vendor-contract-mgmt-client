@@ -40,7 +40,7 @@ export interface IVendor {
   styleUrls: ['./vendor-dashboard.component.scss']
 })
 export class VendorDashboardComponent implements OnInit {
-  displayedColumns: string[] = ['vendor_name', 'contact_phone_number', 'status', 'work_id', 'butt'];
+  displayedColumns: string[] = ['vendor_name', 'contact_phone_number', 'status', 'work_id'/*, 'butt'*/];
   vendors: IVendor[] = [
     {vendor_name: '',
     contact_phone_number: '',
