@@ -1,5 +1,8 @@
 import { Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
+import {MatDialogRef} from '@angular/material/dialog';
+import {MatDialogModule} from '@angular/material/dialog';
+
 import { FormControl, FormGroup } from '@angular/forms';
 import { VendorFormService } from 'src/app/services/vendor-form.services';
 import { IVendor } from '../../../../types/ivendor';
@@ -14,7 +17,7 @@ export class VendorFormComponent implements OnInit {
   type: string = "create";
   formTitle: string = "Vendor Details";
   disableInput: boolean = true;
-  
+
   vendor: IVendor = {
     vendor_name: '',
     work_type: '',
@@ -92,7 +95,7 @@ export class VendorFormComponent implements OnInit {
         case 'notes':
           this.vendor.notes = event.target.values;
           break;
-        
+
       }
     }
     // validateVendor(this.vendor);
