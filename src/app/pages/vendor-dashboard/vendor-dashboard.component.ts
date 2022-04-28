@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import { Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';

@@ -1,1 +1,152 @@
-<p>vendor-form works!</p>
+<html>
+    <body>
+        <h3>{{formTitle}}</h3>
+        <form>
+            <div class="top-line">
+                <mat-form-field appearance="outline" class="vName">
+                    <mat-label>Vendor Name</mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Vendor Name"
+                        (change)="change($event, 'vendor_name')"
+                        [required]="true"
+                        [disabled]="this.disableInput"
+                        [value]="vendor.vendor_name"
+                        (blur)="change($event, 'vendor_name')"
+                    >
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="workType">
+                    <mat-label>Work Type</mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Work Type"
+                        (change)="change($event, 'work_type')"
+                        [required]="true"
+                        [disabled]="this.disableInput"
+                        [value]="vendor.work_type"
+                        (blur)="change($event, 'work_type')"
+                    >
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="selectionMethod">
+                    <mat-label>Selection Method</mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Selection Method"
+                        (change)="change($event, 'selection_method')"
+                        [required]="true"
+                        [disabled]="this.disableInput"
+                        [value]="vendor.selection_method"
+                        (blur)="change($event, 'selection_method')"
+                    >
+                </mat-form-field>
+             </div>
+
+             <div class="line-two">
+                <mat-form-field appearance="outline" class="vPhone">
+                    <mat-label>Vendor Phone Number</mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Vendor Phone Number"
+                        (change)="change($event, 'vendor_phone')"
+                        [required]="false"
+                        [disabled]="this.disableInput"
+                        [value]="vendor.vendor_phone"
+                        (blur)="change($event, 'vendor_phone')"
+                    >
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class="vEmail">
+                    <mat-label>Vendor Email</mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Vendor Email"
+                        (change)="change($event, 'vendor_email')"
+                        [required]="false"
+                        [disabled]="this.disableInput"
+                        [value]="vendor.vendor_email"
+                        (blur)="change($event, 'vendor_email')"
+                    >
+                </mat-form-field>
+            </div>
+            
+            <div class="line-three">
+                <mat-form-field appearance="outline" class="cFname">
+                    <mat-label>Contact First Name</mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Contract First Name"
+                        (change)="change($event, 'contact_fname')"
+                        [required]="true"
+                        [disabled]="this.disableInput"
+                        [value]="vendor.contact_fname"
+                        (blur)="change($event, 'contact_fname')"
+                    >
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="cLname">
+                    <mat-label>Contact Last Name</mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Contract Last Name"
+                        (change)="change($event, 'contact_lname')"
+                        [required]="true"
+                        [disabled]="this.disableInput"
+                        [value]="vendor.contact_lname"
+                        (blur)="change($event, 'contact_lname')"
+                    >
+                </mat-form-field>
+            </div>
+
+            <div class="line-four">
+                <mat-form-field appearance="outline" class="cNum">
+                    <mat-label>Contact Phone Number</mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Contact Phone Number"
+                        (change)="change($event, 'contact_phone')"
+                        [required]="true"
+                        [disabled]="this.disableInput"
+                        [value]="vendor.contact_phone"
+                        (blur)="change($event, 'contact_phone')"
+                    >
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="cEmail">
+                    <mat-label>Contact Email</mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Contact Email"
+                        (change)="change($event, 'contact_email')"
+                        [required]="true"
+                        [disabled]="this.disableInput"
+                        [value]="vendor.contact_email"
+                        (blur)="change($event, 'contact_email')"
+                    >
+                </mat-form-field>
+            </div>
+
+            <div class="last-line">
+                <mat-form-field appearance="outline" class="memo-input">
+                    <mat-label>Notes/Memo</mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Notes/Memo"
+                        (change)="change($event, 'notes')"
+                        [required]="false"
+                        [disabled]="this.disableInput"
+                        [value]="vendor.notes"
+                        (blur)="change($event, 'notes')"
+                    >
+                </mat-form-field>
+            </div>
+            
+            <div class="button-row" *ngIf="!this.disableInput">
+                <button mat-flat-button color ="primary" type="submit" (click)="vendorAction()">{{ this.formTitle }}</button>
+            </div>
+        </form>
+
+    </body>
+
+</html>
