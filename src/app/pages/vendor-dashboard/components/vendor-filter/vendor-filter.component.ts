@@ -2,11 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {COMMA, ENTER, N} from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
-export interface workType{
-  name: string;
-  
-}
+import { workType } from 'src/app/types/work-type';
+import { statusTypes } from 'src/app/types/status';
 
 
 
@@ -21,29 +18,22 @@ export class VendorFilterComponent{
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   workTypes: workType[] = [];  
 
-  statuses = new Map(
-    [['inContract', false], 
-    ['Active', false], 
-    ['Inactive', false], 
-    ['hasIssues', false]]
-    );
+  statusesTest: statusTypes[] = [
+    {name: 'in contract', state: false}, 
+    {name: 'active', state: false},
+    {name: 'I=inactive', state: false},
+    {name: 'has issues', state: false}
+  ];
 
   
-  constructor() {}
-
-
-  @Output() newItemEvent = new EventEmitter<string>();
-
-  addNewItem(value: string) {
-    this.newItemEvent.emit(value);
-    this.workTypes.push({name: value});
-    
+  constructor() {
+    this.statusesTest.push();
   }
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
+    // Add new chips
     if (value) {
       this.workTypes.push({name: value});
     }
@@ -60,15 +50,19 @@ export class VendorFilterComponent{
     }
   }
   checBoxChange(completed: boolean, name: string): void{
-      this.statuses.set(name, completed);
-      // console.log(name, this.statuses.get(name))
-  }
+      for (let i = 0; i < this.statusesTest.length; i++) {
+        if (this.statusesTest[i].name == name) {
+          this.statusesTest[i].state = completed;
+        }
+        
+      }
+    }
 
   filterApply(): any{
 
     const output = [
       this.workTypes,
-      this.statuses
+      this.statusesTest
     ]
 
 
@@ -78,15 +72,11 @@ export class VendorFilterComponent{
   }
 
   filterClear(): void{
-    this.workTypes.forEach(element => {
-      this.remove(element)
-    });
+    this.workTypes = [];
 
-    this.statuses.set('inContract', false)
-    this.statuses.set('Active', false)
-    this.statuses.set('Inactive', false)
-    this.statuses.set('hasIssues', false)
-
+    for (let i = 0; i < this.statusesTest.length; i++) {
+        this.statusesTest[i].state = false;
+    }
   }
 
 
