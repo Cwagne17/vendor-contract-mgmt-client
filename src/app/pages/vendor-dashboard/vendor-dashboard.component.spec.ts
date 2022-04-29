@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
+//import { SearchBarComponent } from './components/search-bar/search-bar.component';
 
 import { VendorDashboardComponent } from './vendor-dashboard.component';
 
