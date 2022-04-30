@@ -6,9 +6,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { VendorService } from '../../services/vendor.service';
-
-
-
+import { Vendor } from '../../types/vendor';
 
 @Component({
   selector: 'app-vendor-dashboard',
@@ -16,14 +14,15 @@ import { VendorService } from '../../services/vendor.service';
   styleUrls: ['./vendor-dashboard.component.scss']
 })
 export class VendorDashboardComponent implements OnInit {
+  vendors: Vendor[] = [];
 
   constructor(private route: ActivatedRoute, private vendorService: VendorService) {}
 
   async ngOnInit(): Promise<void> {
-    this.vendorService.searchVendors({}).then((vendors: any) => {
+    this.vendorService.searchVendors({}).then((vendors: Vendor[]) => {
+      this.vendors = vendors;
       console.log(vendors);
     });
-
   };
   //openFilter(): void {
   //  const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
