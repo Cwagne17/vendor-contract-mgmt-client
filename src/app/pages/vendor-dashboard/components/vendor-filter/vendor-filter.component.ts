@@ -21,13 +21,12 @@ export class VendorFilterComponent{
   statusesTest: statusTypes[] = [
     {name: 'in contract', state: false}, 
     {name: 'active', state: false},
-    {name: 'I=inactive', state: false},
+    {name: 'inactive', state: false},
     {name: 'has issues', state: false}
   ];
 
   
   constructor() {
-    this.statusesTest.push();
   }
 
   add(event: MatChipInputEvent): void {
