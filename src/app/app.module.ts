@@ -19,11 +19,6 @@ import {MatDialogModule} from '@angular/material/dialog';
     PagesModule,
     MatDialogModule
   ],
-  providers: [],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA,
-    NO_ERRORS_SCHEMA
-  ],
   bootstrap: [AppComponent]
 })
 

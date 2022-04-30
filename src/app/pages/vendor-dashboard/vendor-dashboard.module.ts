@@ -12,12 +12,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatTableModule} from '@angular/material/table';
+import { VendorFormService } from '../../services/vendor-form.services';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,10 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatDialogModule,
+    MatTableModule,
     RouterModule.forChild([
       {
         path: '',

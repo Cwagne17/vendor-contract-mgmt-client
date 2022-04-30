@@ -1,5 +1,23 @@
-@import "src/theme.scss";
+@import 'src/vars';
 .example-container{
   min-width: 1000px;
   min-height: 75px;
+}
+.filterbutt {
+  background-color: map-get($palette-dark, "default");
+  margin-left: 2px;
+}
+.searchbutt {
+  background-color: map-get($palette-main, "default");
+  margin-left: 5px;
+}
+.createbutt {
+  background-color: map-get($palette-main, "default");
+  margin-left: 40px;
+}
+.editbutt{
+  font-size: 14px;
+}
+.table {
+  width: 100%;
 }

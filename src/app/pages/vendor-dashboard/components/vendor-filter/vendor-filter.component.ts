@@ -4,7 +4,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { workType } from 'src/app/types/work-type';
 import { statusTypes } from 'src/app/types/status';
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @Component({
@@ -26,8 +26,11 @@ export class VendorFilterComponent{
   ];
 
   
-  constructor() {
+  ngOnInit(): void {
+    console.log('Called ngOnInit method');
+
   }
+
 
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();

@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
 import {ActivatedRoute} from '@angular/router';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -9,6 +9,31 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { VendorFilterComponent } from './components/vendor-filter/vendor-filter.component';
 import { Inject } from '@angular/core';
 import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
+import { VendorFormComponent } from './components/vendor-form/vendor-form.component';
+import {MatTable} from '@angular/material/table';
+
+export interface IVendor {
+ vendor_name: string;
+
+/*    first_name: string;
+
+    last_name: string;
+
+    selection_method: string;
+
+    */status?: string;
+
+    contact_phone_number: string;
+
+    //contact_email: string;
+
+    //memo?: string;
+
+    work_id: string;
+}
+
+
+
 
 @Component({
   selector: 'app-vendor-dashboard',
@@ -16,15 +41,42 @@ import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
   styleUrls: ['./vendor-dashboard.component.scss']
 })
 export class VendorDashboardComponent implements OnInit {
+  displayedColumns: string[] = ['vendor_name', 'contact_phone_number', 'status', 'work_id'/*, 'butt'*/];
+  vendors: IVendor[] = [
+    {vendor_name: '',
+    contact_phone_number: '',
+    status:'',
+    work_id:'' }
+  ];
 
-  constructor(private route: ActivatedRoute, @Inject(MatDialog)private dialogRef : MatDialog) {}
+  constructor(private route: ActivatedRoute, @Inject(MatDialog)private dialog : MatDialog) {}
 
   ngOnInit(): void {
     console.log('Called ngOnInit method');
+  };
+
+  openFilter() {
+    const dialogRef = this.dialog.open(VendorFilterComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`)
+    });
+  }
+
+  openForm() {
+    const dialogRef2 = this.dialog.open(VendorFormComponent, {
+      height: '100%',
+      width: '50%',
+    });
+    dialogRef2.updatePosition({ top: '0px', left: `50%`});
+    //dialogRef2.updatePosition()
+    dialogRef2.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`)
+    });
   }
   
   openDialog(){
-    this.dialogRef.open(VendorFilterComponent, {
+    this.dialog.open(VendorFilterComponent, {
       height : '25vw',
       width : '40vw'
     });
@@ -33,4 +85,9 @@ export class VendorDashboardComponent implements OnInit {
   pullInfo(){
     
   }
+  //openFilter(): void {
+  //  const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+  //    width: '250px',
+  //    data: {name: this.name, animal: this.animal},
+  // };
 }
