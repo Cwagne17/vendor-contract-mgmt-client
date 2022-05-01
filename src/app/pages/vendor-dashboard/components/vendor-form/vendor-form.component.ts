@@ -1,11 +1,18 @@
-import { Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
-import {MatDialogRef} from '@angular/material/dialog';
-import {MatDialogModule} from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { SnackbarService } from 'src/app/services/snackbar.service';
+import { SNACKBAR_COLOR } from 'src/app/shared/snackbar/snackbar.component';
+import { VendorService } from '../../../../services/vendor.service';
+import { WorkTypeService } from '../../../../services/work-type.service';
+import { CreateVendorDto, UpdateVendorDto, Vendor } from '../../../../types/vendor';
 
-import { FormControl, FormGroup } from '@angular/forms';
-import { VendorFormService } from 'src/app/services/vendor-form.services';
-import { IVendor } from '../../../../types/ivendor';
+export namespace VendorForm {
+  export enum Actions {
+    CREATE = "create",
+    UPDATE = "update",
+    READ = "read"
+  }
+}
 
 @Component({
   selector: 'app-vendor-form',
@@ -13,51 +20,54 @@ import { IVendor } from '../../../../types/ivendor';
   styleUrls: ['./vendor-form.component.scss']
 })
 export class VendorFormComponent implements OnInit {
-
-  type: string = "create";
+  // Form Attributes
+  type: string = VendorForm.Actions.READ;
   formTitle: string = "Vendor Details";
   disableInput: boolean = true;
 
-  vendor: IVendor = {
+  // Data Attributes
+  statuses: Vendor.StatusTypes[] = Object.values(Vendor.StatusTypes);
+  selected: any;
+  vendor: Vendor = {
+    id: '',
     vendor_name: '',
-    work_type: '',
+    first_name: '',
+    last_name: '',
     selection_method: '',
-    vendor_phone: '',
-    vendor_email: '',
-    contact_fname: '',
-    contact_lname: '',
-    contact_phone: '',
+    status: Vendor.StatusTypes.ACTIVE,
+    contact_phone_number: '',
     contact_email: '',
-    notes:'',
-  }
+    memo: '',
+    workType: {
+      id: '',
+      type: '',
+    }
+  };
 
-  constructor(private service: VendorFormService) { }
+  constructor(
+    private vendorService: VendorService,
+    private workTypeService: WorkTypeService,
+    private snackbarService: SnackbarService,
+    @Inject(MAT_DIALOG_DATA) public data: { vendor?: Vendor, action: VendorForm.Actions }
+  ) {}
 
 
   ngOnInit(): void {
-
-    switch(this.type){
-      case "create":
-        this.formTitle = "Create Vendor";
-        this.disableInput = false;
-        break;
-      case "update":
-        this.formTitle = "Create Vendor";
-        this.disableInput = false;
-        break;
-      default:
-        break;
+    if (this.data.vendor) {
+      this.vendor = this.data.vendor;
     }
-    console.log(this.formTitle);
+    
+    this.changeForm(this.data.action);
   }
 
   vendorAction() {
     switch(this.type){
-      case "create":
-        console.log("create", this.vendor);
+      case VendorForm.Actions.CREATE:
+        const createVendorDto: CreateVendorDto = this.mapVendorToCreateDto();
+        this.vendorService.createVendor(createVendorDto);
         break;
-      case "update":
-        console.log("create", this.vendor);
+      case VendorForm.Actions.UPDATE:
+        this.vendorService.updateVendor(this.vendor.id, {...this.vendor} as UpdateVendorDto);
         break;
     }
   }
@@ -65,40 +75,58 @@ export class VendorFormComponent implements OnInit {
   change(event: any, property: string) {
     if (typeof event === "object") {
       switch(property) {
-        case 'contract_phone':
-          this.vendor.contact_phone = event.target.value;
-          break;
         case 'vendor_name':
           this.vendor.vendor_name = event.target.value;
           break;
-        case 'work_type':
-          this.vendor.work_type = event.target.value;
+        case 'first_name':
+          this.vendor.first_name = event.target.value;
+          break;
+        case 'last_name':
+          this.vendor.last_name = event.target.value;
           break;
         case 'selection_method':
           this.vendor.selection_method = event.target.value;
           break;
-        case 'vendor_phone':
-          this.vendor.vendor_phone = event.target.value;
+        case 'status':
+          this.vendor.status = event.target.value;
           break;
-        case 'vendor_emali':
-          this.vendor.vendor_email = event.target.value;
-          break;
-        case 'contract_fname':
-          this.vendor.contact_fname = event.target.value;
-          break;
-        case 'contract_lname':
-          this.vendor.contact_lname = event.target.value;
+        case 'contact_phone_number':
+          this.vendor.contact_phone_number = event.target.value;
           break;
         case 'contact_email':
-          this.vendor.contact_email = event.target.values;
+          this.vendor.contact_email = event.target.value;
           break;
-        case 'notes':
-          this.vendor.notes = event.target.values;
+        case 'memo':
+          this.vendor.memo = event.target.value;
           break;
-
+        case 'workType':
+          this.vendor.workType.type = event.target.value;
+          break;
       }
     }
-    // validateVendor(this.vendor);
   }
-}
 
+  changeForm(type: VendorForm.Actions | 'update') {
+    this.type = type;
+    switch(this.type){
+      case VendorForm.Actions.CREATE :
+        this.formTitle = "Create Vendor";
+        this.disableInput = false;
+        break;
+      case VendorForm.Actions.UPDATE:
+        this.formTitle = "Update Vendor";
+        this.disableInput = false;
+        break;
+      default:
+        break;
+    }
+  }
+
+  mapVendorToCreateDto(): CreateVendorDto {
+    return {
+      work_id: this.vendor.workType.id,
+      ...this.vendor
+    } as CreateVendorDto;
+  }
+
+}

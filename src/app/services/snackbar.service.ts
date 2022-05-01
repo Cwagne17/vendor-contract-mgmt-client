@@ -52,7 +52,7 @@ export class SnackbarService {
     this.notification$.next({
       title: title,
       message: message,
-      color: SNACKBAR_COLOR.DANGER,
+      color: SNACKBAR_COLOR.DANGER
     });
   }
 }

@@ -4,7 +4,7 @@ import { VendorService } from '../../services/vendor.service';
 import { Vendor } from '../../types/vendor';
 import {MatDialog} from '@angular/material/dialog';
 import { VendorFilterComponent } from './components/vendor-filter/vendor-filter.component';
-import { VendorFormComponent } from './components/vendor-form/vendor-form.component';
+import { VendorForm, VendorFormComponent } from './components/vendor-form/vendor-form.component';
 
 @Component({
   selector: 'app-vendor-dashboard',
@@ -37,7 +37,8 @@ export class VendorDashboardComponent implements OnInit {
 
   openForm(vendor?: Vendor) {
     console.log(vendor);
-    const data = vendor ? { vendor: vendor, action: "Read Vendor" } : { action: "Create Vendor" }; 
+    const data = vendor ? { vendor: vendor, action: VendorForm.Actions.READ } : { action: VendorForm.Actions.CREATE }; 
+
     const dialogRef2 = this.dialog.open(
       VendorFormComponent, {
         height: '100%',
