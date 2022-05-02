@@ -1,39 +1,10 @@
 import { Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators, FormControl} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {MatButtonModule} from '@angular/material/button';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { VendorService } from '../../services/vendor.service';
+import { Vendor } from '../../types/vendor';
 import { VendorFilterComponent } from './components/vendor-filter/vendor-filter.component';
+import { VendorForm, VendorFormComponent } from './components/vendor-form/vendor-form.component';
+import {MatDialog} from '@angular/material/dialog';
 import { Inject } from '@angular/core';
-import { tokenize } from '@angular/compiler/src/ml_parser/lexer';
-import { VendorFormComponent } from './components/vendor-form/vendor-form.component';
-import {MatTable} from '@angular/material/table';
-
-export interface IVendor {
- vendor_name: string;
-
-/*    first_name: string;
-
-    last_name: string;
-
-    selection_method: string;
-
-    */status?: string;
-
-    contact_phone_number: string;
-
-    //contact_email: string;
-
-    //memo?: string;
-
-    work_id: string;
-}
-
-
-
 
 @Component({
   selector: 'app-vendor-dashboard',
@@ -41,18 +12,19 @@ export interface IVendor {
   styleUrls: ['./vendor-dashboard.component.scss']
 })
 export class VendorDashboardComponent implements OnInit {
-  displayedColumns: string[] = ['vendor_name', 'contact_phone_number', 'status', 'work_id'/*, 'butt'*/];
-  vendors: IVendor[] = [
-    {vendor_name: '',
-    contact_phone_number: '',
-    status:'',
-    work_id:'' }
-  ];
+  vendors: Vendor[] = [];
+  displayedColumns: string[] = ['vendor_name', 'contact_phone_number', 'status', 'workType'/*, 'butt'*/];
 
-  constructor(private route: ActivatedRoute, @Inject(MatDialog)private dialog : MatDialog) {}
-
-  ngOnInit(): void {
-    console.log('Called ngOnInit method');
+  constructor(
+    private vendorService: VendorService,
+    @Inject(MatDialog)private dialog : MatDialog
+  ) {}
+  
+  async ngOnInit(): Promise<void> {
+    this.vendorService.searchVendors({}).then((vendors: Vendor[]) => {
+      this.vendors = vendors;
+      console.log(vendors);
+    });
   };
 
   openFilter() {
@@ -63,13 +35,20 @@ export class VendorDashboardComponent implements OnInit {
     });
   }
 
-  openForm() {
-    const dialogRef2 = this.dialog.open(VendorFormComponent, {
-      height: '100%',
-      width: '50%',
-    });
+  openForm(vendor?: Vendor) {
+    console.log(vendor);
+    const data = vendor ? { vendor: vendor, action: VendorForm.Actions.READ } : { action: VendorForm.Actions.CREATE }; 
+
+    const dialogRef2 = this.dialog.open(
+      VendorFormComponent, {
+        height: '100%',
+        width: '50%',
+        data: data
+      }
+    );
+
     dialogRef2.updatePosition({ top: '0px', left: `50%`});
-    //dialogRef2.updatePosition()
+    
     dialogRef2.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`)
     });

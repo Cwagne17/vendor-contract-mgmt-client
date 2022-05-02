@@ -1,9 +1,80 @@
-import { workType } from "./work-type"
-import { statusTypes } from "./status"
+import { WorkType } from "./work-type"
 
-export interface VendorQuery {
-    text: string,
-    status:  statusTypes[] // this will need to be defined as the enum like I was talking about above in contract, active, etc.
-   work_type: workType // should be a defined entity in the types/work-type.ts file 
-   sort: "ASC" | "DESC" | -1 | 1
-   }
+export interface Vendor {
+    id: string
+
+    vendor_name: string
+
+    first_name: string
+    
+    last_name: string
+    
+    selection_method: string
+    
+    status?: Vendor.StatusTypes
+
+    contact_phone_number: string
+
+    contact_email: string
+
+    memo?: string
+
+    workType: WorkType
+}
+
+export interface CreateVendorDto {
+    vendor_name: string
+
+    first_name: string
+
+    last_name: string
+
+    selection_method: string
+
+    status?: Vendor.StatusTypes
+
+    contact_phone_number: string
+
+    contact_email: string
+
+    memo?: string
+
+    work_id: string
+}
+
+export interface UpdateVendorDto {
+    vendor_name?: string
+
+    first_name?: string
+
+    last_name?: string
+
+    selection_method?: string
+
+    status?: Vendor.StatusTypes
+
+    contact_phone_number?: string
+
+    contact_email?: string
+
+    memo?: string
+}
+
+export interface SearchVendorsDto {
+    text?: string
+    
+    work_type?: string[]
+
+    status?: Vendor.StatusTypes[]
+
+    sort?: "ASC" | "DESC" | -1 | 1
+}
+
+export namespace Vendor {
+    export enum StatusTypes {
+        IN_CONTRACT = "in contract",
+        ACTIVE = "active",
+        INACTIVE = "inactive",
+        HAS_ISSUES = "has issues"
+    }
+}

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import {Router} from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
+import { SnackbarService } from './services/snackbar.service';
+import { SnackbarComponent } from './shared/snackbar/snackbar.component';
 
 
 @Component({
@@ -8,10 +12,33 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  
-  constructor(private router: Router) {}
+  private destroyed$: Subject<boolean> = new Subject();
 
-  ngOnInit() {}
+  constructor(
+    private router: Router,
+    private notificationService: SnackbarService,
+    private _snackBar: MatSnackBar
+  ) {}
 
+  ngOnInit() {
 
+    this.notificationService.notification$
+      .pipe(takeUntil(this.destroyed$))
+      .subscribe((notif) => {
+        if (notif) {
+          this._snackBar.openFromComponent(SnackbarComponent, {
+            data: {
+              title: notif.title,
+              message: notif.message,
+              color: notif.color,
+              callbacks: notif.callbacks,
+            },
+            duration:
+              notif.callbacks && notif.callbacks.length > 0 ? undefined : 4000,
+            direction: 'ltr',
+            panelClass: 'mat-snackbar',
+          });
+        }
+      });
+  }
 }
