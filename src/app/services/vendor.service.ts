@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { IVendorService } from './interfaces/ivendor.service';
-import * as querystring from 'query-string';
 import { retry } from 'rxjs';
 import { VENDOR_ROUTES } from '../../environments/routes';
 import {CreateVendorDto, SearchVendorsDto, UpdateVendorDto, Vendor} from '../types/vendor';
@@ -21,19 +20,19 @@ export class VendorService implements IVendorService {
 
   createVendor(createVendorDto: CreateVendorDto): Promise<void> {
     return new Promise((resolve, reject) => {
+      this.auth.initHeaders();
       this.http
       .post(
         VENDOR_ROUTES.CREATE_VENDOR(), 
-        createVendorDto, {
-        headers: this.auth.headers
-      })
+        createVendorDto, 
+        { headers: this.auth.headers }
+      )
       .pipe(retry(3))
       .toPromise()
       .then((res: any) => {
         resolve(res);
       },
       (error) => {
-        console.log(error)
         this.snackbarService.sendNotificationByError(error);
         reject(error);
       });
@@ -42,12 +41,13 @@ export class VendorService implements IVendorService {
 
   updateVendor(id: string, updateVendorDto: UpdateVendorDto): Promise<void> {
     return new Promise((resolve, reject) => {
+      this.auth.initHeaders();
       this.http
       .patch(
         VENDOR_ROUTES.UPDATE_VENDOR(id), 
-        updateVendorDto, {
-        headers: this.auth.headers
-      })
+        updateVendorDto, 
+        { headers: this.auth.headers }
+      )
       .pipe(retry(3))
       .toPromise()
       .then((res: any) => {
@@ -65,9 +65,9 @@ export class VendorService implements IVendorService {
       this.auth.initHeaders();
       this.http
         .get(
-          VENDOR_ROUTES.SEARCH_VENDORS(query), { 
-          headers: this.auth.headers 
-        })
+          VENDOR_ROUTES.SEARCH_VENDORS(query), 
+          { headers: this.auth.headers }
+        )
         .pipe(retry(3))
         .toPromise()
         .then((res: any) => {
