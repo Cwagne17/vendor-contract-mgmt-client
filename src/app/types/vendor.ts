@@ -63,7 +63,7 @@ export interface UpdateVendorDto {
 export interface SearchVendorsDto {
     text?: string
     
-    work_type?: string[]
+    work_type: string[]
 
     status?: Vendor.StatusTypes[]
 

@@ -12,8 +12,8 @@
 <mat-form-field class="WorkType" appearance="fill" >
     <mat-label>Work Types</mat-label>
     <mat-chip-list #chipList >
-      <mat-chip *ngFor="let item of workTypes" (removed)="remove(item)">
-        {{item.name}}
+      <mat-chip *ngFor="let item of this.query.work_type" (removed)="remove(item)">
+        {{item}}
         <button matChipRemove>
           <mat-icon>cancel</mat-icon>
         </button>
@@ -29,6 +29,6 @@
 <hr>
 <button mat-button style="font-size: 20px;" color="primary" (click)="filterClear()">Clear</button>
 <button mat-button style="font-size: 20px; float: right;" color="primary" mat-dialog-close>Cancel</button>
-<button mat-button style="font-size: 20px; float: right;"  color="primary" (click)="filterApply()">Apply</button>
+<button mat-button style="font-size: 20px; float: right;"  color="primary" (click)="filterApply()" mat-dialog-close>Apply</button>
 
 

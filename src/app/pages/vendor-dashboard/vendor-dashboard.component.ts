@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { VendorService } from '../../services/vendor.service';
-import { Vendor } from '../../types/vendor';
+import { SearchVendorsDto, Vendor } from '../../types/vendor';
 import { VendorFilterComponent } from './components/vendor-filter/vendor-filter.component';
 import { VendorForm, VendorFormComponent } from './components/vendor-form/vendor-form.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -15,13 +15,17 @@ export class VendorDashboardComponent implements OnInit {
   vendors: Vendor[] = [];
   displayedColumns: string[] = ['vendor_name', 'contact_phone_number', 'status', 'workType'/*, 'butt'*/];
 
+  query: SearchVendorsDto = {
+    work_type: []
+  }
+
   constructor(
     private vendorService: VendorService,
     @Inject(MatDialog)private dialog : MatDialog
   ) {}
   
   async ngOnInit(): Promise<void> {
-    this.vendorService.searchVendors({}).then((vendors: Vendor[]) => {
+    this.vendorService.searchVendors(this.query).then((vendors: Vendor[]) => {
       this.vendors = vendors;
       console.log(vendors);
     });
@@ -30,8 +34,11 @@ export class VendorDashboardComponent implements OnInit {
   openFilter() {
     const dialogRef = this.dialog.open(VendorFilterComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`)
+    dialogRef.afterClosed().subscribe((result: SearchVendorsDto) => {
+      console.log(`Dialog result: ${this.query.work_type}`)
+      result.work_type.forEach(element => {
+        this.query.work_type.push(element)
+      });
     });
   }
 
