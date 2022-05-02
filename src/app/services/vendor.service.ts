@@ -33,6 +33,7 @@ export class VendorService implements IVendorService {
         resolve(res);
       },
       (error) => {
+        console.log(error)
         this.snackbarService.sendNotificationByError(error);
         reject(error);
       });

@@ -48,7 +48,7 @@ export class SnackbarService {
         message = 'Something went wrong. Please try again later.';
         break;
     }
-
+    console.log("thing", message);
     this.notification$.next({
       title: title,
       message: message,

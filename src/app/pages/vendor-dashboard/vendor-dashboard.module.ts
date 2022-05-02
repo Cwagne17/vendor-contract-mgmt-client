@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatTableModule} from '@angular/material/table';
 import { SharedModule } from '../../shared/shared.module';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { SharedModule } from '../../shared/shared.module';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatSelectModule,
+    MatOptionModule,
     MatTableModule,
     SharedModule,
     RouterModule.forChild([

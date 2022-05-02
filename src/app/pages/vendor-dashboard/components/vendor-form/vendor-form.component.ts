@@ -60,11 +60,11 @@ export class VendorFormComponent implements OnInit {
     this.changeForm(this.data.action);
   }
 
-  vendorAction() {
+  async vendorAction() {
     switch(this.type){
       case VendorForm.Actions.CREATE:
         const createVendorDto: CreateVendorDto = this.mapVendorToCreateDto();
-        this.vendorService.createVendor(createVendorDto);
+        await this.vendorService.createVendor(createVendorDto);
         break;
       case VendorForm.Actions.UPDATE:
         this.vendorService.updateVendor(this.vendor.id, {...this.vendor} as UpdateVendorDto);
