@@ -16,7 +16,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatTableModule} from '@angular/material/table';
-import { VendorFormService } from '../../services/vendor-form.services';
+import { SharedModule } from '../../shared/shared.module';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,10 @@ import { VendorFormService } from '../../services/vendor-form.services';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatSelectModule,
+    MatOptionModule,
     MatTableModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',
