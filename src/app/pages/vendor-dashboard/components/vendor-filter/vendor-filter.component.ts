@@ -60,18 +60,16 @@ export class VendorFilterComponent{
       }
     }
 
-  filterApply(): any{
+  filterApply(): void{
 
     const output = [
       this.workTypes,
       this.statusesTest
     ]
-
-
-    console.log(output)
     
-    return this.workTypes
-  }
+
+    }
+
 
   filterClear(): void{
     this.workTypes = [];
