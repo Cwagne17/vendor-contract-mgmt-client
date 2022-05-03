@@ -35,10 +35,11 @@ export class VendorDashboardComponent implements OnInit {
     const dialogRef = this.dialog.open(VendorFilterComponent);
 
     dialogRef.afterClosed().subscribe((result: SearchVendorsDto) => {
+      this.query.work_type = result.work_type;
+      this.query.status = result.status;
+
       console.log(`Dialog result: ${this.query.work_type}`)
-      result.work_type.forEach(element => {
-        this.query.work_type.push(element)
-      });
+      console.log(`Dialog result: ${this.query.status}`)
     });
   }
 
@@ -68,9 +69,6 @@ export class VendorDashboardComponent implements OnInit {
     });
   }
 
-  pullInfo(){
-    
-  }
   //openFilter(): void {
   //  const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
   //    width: '250px',

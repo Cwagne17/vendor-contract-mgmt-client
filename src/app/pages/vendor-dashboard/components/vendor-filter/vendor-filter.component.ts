@@ -23,7 +23,6 @@ export class VendorFilterComponent implements OnInit {
 
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
-  workTypes: string[] = [];  
 
   statusesTest: {name: Vendor.StatusTypes, state: boolean}[] = [
     {name: Vendor.StatusTypes.IN_CONTRACT, state: false}, 
@@ -37,7 +36,7 @@ export class VendorFilterComponent implements OnInit {
 
   
   ngOnInit(): void {
-    console.log('Called ngOnInit method');
+    console.log();
 
   }
 
@@ -70,17 +69,23 @@ export class VendorFilterComponent implements OnInit {
     }
 
   filterApply(): void{
+    this.statusesTest.forEach(element => {
+      if (element.state) {
+        this.query.status?.push(element.name)
+      }
+    });
+
     this.dialogRef.close(this.query);    
 
   }
 
 
   filterClear(): void{
-    this.workTypes = [];
+    this.query.work_type = [];
 
     for (let i = 0; i < this.statusesTest.length; i++) {
-        this.statusesTest[i].state = false;
-    }
+      this.statusesTest[i].state = false;
+  }
   }
 
 
