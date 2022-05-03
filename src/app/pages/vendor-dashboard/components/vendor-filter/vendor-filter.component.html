@@ -1,1 +1,34 @@
-<p>vendor-filter works!</p>
+
+<p style="font-size: 30px;" id="SIc"> Status</p>
+<mat-checkbox color="primary" class="CheckBox" (change)="checBoxChange($event.checked, 'in contract')" [checked]="this.statusesTest[0].state">In Contract</mat-checkbox>
+
+<mat-checkbox color="primary" class="CheckBox" (change)="checBoxChange($event.checked, 'active')" [checked]="this.statusesTest[1].state">Active</mat-checkbox>
+
+<mat-checkbox color="primary" class="CheckBox" (change)="checBoxChange($event.checked, 'inactive')" [checked]="this.statusesTest[2].state">Inactive</mat-checkbox>
+
+<mat-checkbox color="primary" class="CheckBox" (change)="checBoxChange($event.checked, 'has issues')" [checked]="this.statusesTest[3].state">Has Issues</mat-checkbox>
+
+<hr>
+<mat-form-field class="WorkType" appearance="fill" >
+    <mat-label>Work Types</mat-label>
+    <mat-chip-list #chipList >
+      <mat-chip *ngFor="let item of this.query.work_type" (removed)="remove(item)">
+        {{item}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input placeholder="New work type..."
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+  </mat-form-field>
+
+<hr>
+<button mat-button style="font-size: 20px;" color="primary" (click)="filterClear()">Clear</button>
+<button mat-button style="font-size: 20px; float: right;" color="primary" mat-dialog-close>Cancel</button>
+<button mat-button style="font-size: 20px; float: right;"  color="primary" (click)="filterApply()" mat-dialog-close>Apply</button>
+
+

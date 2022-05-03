@@ -13,8 +13,11 @@ import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule} from '@angular/material/table';
 import { SharedModule } from '../../shared/shared.module';
 import { MatSelectModule } from '@angular/material/select';
@@ -32,6 +35,8 @@ import { MatOptionModule } from '@angular/material/core';
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
+    MatChipsModule,
+    MatCheckboxModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
@@ -57,3 +62,5 @@ import { MatOptionModule } from '@angular/material/core';
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 })
 export class VendorDashboardModule { }
+
+

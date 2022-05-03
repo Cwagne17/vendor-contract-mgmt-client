@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app.routes';
 import { PagesModule } from './pages/pages.module';
+import {MatDialogModule} from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -18,6 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     HttpClientModule,
     BrowserAnimationsModule,
     PagesModule,
+    MatDialogModule,
     SharedModule,
     MatSnackBarModule
   ],

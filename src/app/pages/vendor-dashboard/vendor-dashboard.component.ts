@@ -1,10 +1,10 @@
 import { Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
 import { VendorService } from '../../services/vendor.service';
-import { Vendor } from '../../types/vendor';
-import {MatDialog} from '@angular/material/dialog';
+import { SearchVendorsDto, Vendor } from '../../types/vendor';
 import { VendorFilterComponent } from './components/vendor-filter/vendor-filter.component';
 import { VendorForm, VendorFormComponent } from './components/vendor-form/vendor-form.component';
+import {MatDialog} from '@angular/material/dialog';
+import { Inject } from '@angular/core';
 
 @Component({
   selector: 'app-vendor-dashboard',
@@ -15,13 +15,17 @@ export class VendorDashboardComponent implements OnInit {
   vendors: Vendor[] = [];
   displayedColumns: string[] = ['vendor_name', 'contact_phone_number', 'status', 'workType'/*, 'butt'*/];
 
+  query: SearchVendorsDto = {
+    work_type: []
+  }
+
   constructor(
     private vendorService: VendorService,
-    public dialog: MatDialog
+    @Inject(MatDialog)private dialog : MatDialog
   ) {}
   
   async ngOnInit(): Promise<void> {
-    this.vendorService.searchVendors({}).then((vendors: Vendor[]) => {
+    this.vendorService.searchVendors(this.query).then((vendors: Vendor[]) => {
       this.vendors = vendors;
       console.log(vendors);
     });
@@ -30,8 +34,12 @@ export class VendorDashboardComponent implements OnInit {
   openFilter() {
     const dialogRef = this.dialog.open(VendorFilterComponent);
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`)
+    dialogRef.afterClosed().subscribe((result: SearchVendorsDto) => {
+      this.query.work_type = result.work_type;
+      this.query.status = result.status;
+
+      console.log(`Dialog result: ${this.query.work_type}`)
+      console.log(`Dialog result: ${this.query.status}`)
     });
   }
 
@@ -53,6 +61,14 @@ export class VendorDashboardComponent implements OnInit {
       console.log(`Dialog result: ${result}`)
     });
   }
+  
+  openDialog(){
+    this.dialog.open(VendorFilterComponent, {
+      height : '25vw',
+      width : '40vw'
+    });
+  }
+
   //openFilter(): void {
   //  const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
   //    width: '250px',
