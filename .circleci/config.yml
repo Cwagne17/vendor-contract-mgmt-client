@@ -42,7 +42,7 @@ jobs:
       - run:
           name: Build Application
           command: >
-            npm install angular-cli@latest
+            npm install -g angular-cli@latest
 
             ng build --configuration=production
       - run: ls -al
