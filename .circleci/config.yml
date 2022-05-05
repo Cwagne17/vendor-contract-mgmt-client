@@ -41,7 +41,9 @@ jobs:
         command: npm install
     - run:
         name: Build Application
-        command: ng build --aot --build-optimizer=true --optimization=true --configuration=production
+        command: >
+          npm i -g @angular/cli
+          ng build --aot --build-optimizer=true --optimization=true --configuration=production
     - aws-s3/sync:
         aws-region: AWS_N_VA_REGION
         aws-access-key-id: AWS_ACCESS_KEY_ID_S3
