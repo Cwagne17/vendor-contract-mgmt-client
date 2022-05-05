@@ -48,7 +48,7 @@ jobs:
         aws-region: AWS_N_VA_REGION
         aws-access-key-id: AWS_ACCESS_KEY_ID_S3
         aws-secret-access-key: AWS_SECRET_ACCESS_KEY_S3
-        from: ./dist/vendor-contract-mgmt-client
+        from: ./dist
         to: s3://vendor-contract-mgmt-client
 
 workflows:
