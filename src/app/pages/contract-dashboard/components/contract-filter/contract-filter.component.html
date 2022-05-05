@@ -1,0 +1,24 @@
+<mat-form-field class="WorkType" appearance="fill" >
+    <mat-label>Work Types</mat-label>
+    <mat-chip-list #chipList >
+      <mat-chip *ngFor="let item of this.query.work_type" (removed)="remove(item)">
+        {{item}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+      <input placeholder="New work type..."
+             [matChipInputFor]="chipList"
+             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+             [matChipInputAddOnBlur]="addOnBlur"
+             (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+  </mat-form-field>
+
+<hr>
+<button mat-button style="font-size: 20px;" class="clear" color="primary" (click)="filterClear()">Clear</button>
+<button mat-button style="font-size: 20px; float: right;" color="primary" mat-dialog-close>Cancel</button>
+<button mat-button style="font-size: 20px; float: right;"  color="primary" (click)="filterApply()" mat-dialog-close>Apply</button>
+
+
+
