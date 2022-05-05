@@ -61,3 +61,11 @@ workflows:
             branches:
               ignore:
                 - /main/
+  deploy-production:
+    jobs:
+      - deploy-s3:
+          context:
+            - AWS
+          filters:
+            branches:
+              only: /main/
