@@ -35,22 +35,23 @@ jobs:
   deploy-s3:
     executor: node-executor
     steps:
-    - checkout
-    - run:
-        name: Install dependencies
-        command: npm install
-    - run:
-        name: Build Application
-        command: >
-          npm i @angular/cli
-          ng build --configuration=production
-    - run: ls -al; ls -al ./dist/
-    - aws-s3/sync:
-        aws-region: AWS_N_VA_REGION
-        aws-access-key-id: AWS_ACCESS_KEY_ID_S3
-        aws-secret-access-key: AWS_SECRET_ACCESS_KEY_S3
-        from: ./dist/
-        to: s3://vendor-contract-mgmt-client
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Build Application
+          command: >
+            npm i @angular/cli;
+
+            ng build --configuration=production
+      - run: ls -al
+      - aws-s3/sync:
+          aws-region: AWS_N_VA_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID_S3
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY_S3
+          from: ./dist/
+          to: s3://vendor-contract-mgmt-client
 
 workflows:
   test-lint-project:
