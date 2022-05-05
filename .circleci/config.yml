@@ -37,14 +37,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install dependencies
+          name: Install Dependencies
           command: npm install
       - run:
           name: Build Application
-          command: >
-            npm install -g angular-cli@latest
-
-            ng build --configuration=production
+          command: yarn ng build --configuration production --no-progress
       - run: ls -al
       - aws-s3/sync:
           aws-region: AWS_N_VA_REGION
