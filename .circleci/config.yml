@@ -43,9 +43,9 @@ jobs:
         name: Build Application
         command: ng build --aot --build-optimizer=true --optimization=true --configuration=production
     - aws-s3/sync:
-        aws-region: us-east-1
-        aws-access-key-id: $AWS_ACCESS_KEY_ID_S3
-        aws-secret-access-key: $AWS_SECRET_ACCESS_KEY_S3
+        aws-region: AWS_N_VA_REGION
+        aws-access-key-id: AWS_ACCESS_KEY_ID_S3
+        aws-secret-access-key: AWS_SECRET_ACCESS_KEY_S3
         from: ./dist/vendor-contract-mgmt-client
         to: s3://vendor-contract-mgmt-client
 
