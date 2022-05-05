@@ -44,8 +44,7 @@ jobs:
         command: >
           npm i @angular/cli
           ng build --configuration=production
-          ls -al
-          ls -al ./dist
+    - run: ls -al; ls -al ./dist/
     - aws-s3/sync:
         aws-region: AWS_N_VA_REGION
         aws-access-key-id: AWS_ACCESS_KEY_ID_S3
