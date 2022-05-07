@@ -1,10 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { VendorForm } from 'src/app/pages/vendor-dashboard/components/vendor-form/vendor-form.component';
 import { ContractService } from 'src/app/services/contract.service';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { WorkTypeService } from 'src/app/services/work-type.service';
-import { SNACKBAR_COLOR } from 'src/app/shared/snackbar/snackbar.component';
 import { Contract, CreateContractDto, UpdateContractDto } from 'src/app/types/contract';
 
 export namespace ContractForm {
@@ -35,7 +33,7 @@ export class ContractFormComponent implements OnInit {
     vendor_name: '',
     start_date: '',
     end_date: '',
-    amount: '',
+    amount: 0,
     conditions: '',
     memo: '',
     work_type: {
