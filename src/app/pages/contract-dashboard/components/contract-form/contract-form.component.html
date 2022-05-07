@@ -1,0 +1,112 @@
+<html>
+    <body>
+        <h3>{{formTitle}}</h3>
+        <form>
+            <div class="row-one">
+                <mat-form-field appearance="outline" class="vName">
+                    <mat-label>Vendor Name</mat-label>
+                    <input
+                        matInput
+                        placeholder="Vendor Name"
+                        (change)="change($event, 'vendor_name')"
+                        [required]="true"
+                        [disabled]="this.disableInput"
+                        [value]=""
+                        (blur)="change($event, 'vendor_name')"
+                    >
+                </mat-form-field>
+            </div>
+
+            <div class="row-two">
+                <mat-form-field appearance="outline" class="sDate">
+                    <mat-label>Start Date</mat-label>
+                    <input
+                        matInput
+                        placeholder="Start Date"
+                        (change)="change($event, 'start_date')"
+                        [required]="true"
+                        [disabled]="this.disableInput"
+                        [value]=""
+                        (blur)="change($event, 'start_date')"
+                    >
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="eDate">
+                    <mat-label>End Date</mat-label>
+                    <input
+                        matInput
+                        placeholder="End Date"
+                        (change)="change($event, 'end_date')"
+                        [required]="true"
+                        [disabled]="this.disableInput"
+                        [value]=""
+                        (blur)="change($event, 'end_date')"
+                    >
+                </mat-form-field>
+            </div>
+
+            <div class="row-three">
+                <mat-form-field appearance="outline" class="amount">
+                    <mat-label>Amount</mat-label>
+                    <input
+                        matInput
+                        placeholder="Amount"
+                        (change)="change($event, 'amount')"
+                        [required]="true"
+                        [disabled]="this.disableInput"
+                        [value]=""
+                        (blur)="change($event, 'amount')"
+                    >
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="workType">
+                    <mat-label>Work Type</mat-label>
+                    <input
+                        matInput
+                        placeholder="Work Type"
+                        (change)="change($event, 'work_type')"
+                        [required]="true"
+                        [disabled]="this.disableInput"
+                        [value]=""
+                        (blur)="change($event, 'work_type')"
+                    >
+                </mat-form-field>
+            </div>
+
+            <div class="row-four">
+                <mat-form-field appearance="outline" class="conditions">
+                    <mat-label>Conditions</mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Conditions"
+                        (change)="change($event, 'conditions')"
+                        [required]="false"
+                        [disabled]="this.disableInput"
+                        [value]=""
+                        (blur)="change($event, 'conditions')"
+                    >
+                </mat-form-field>
+            </div>         
+            
+            <div class="row five">
+                <mat-form-field appearance="outline" class="memo-input">
+                    <mat-label>Notes/Memo</mat-label>
+                    <input 
+                        matInput 
+                        placeholder="Notes/Memo"
+                        (change)="change($event, 'memo')"
+                        [required]="false"
+                        [disabled]="this.disableInput"
+                        [value]=""
+                        (blur)="change($event, 'memo')"
+                    >
+                </mat-form-field>
+            </div>
+
+            <div class="button-row">
+                <button *ngIf="!this.disableInput" mat-flat-button mat-dialog-close color="primary" type="submit" (click)="contractAction()">{{this.formTitle}}</button>
+                <button *ngIf="this.disableInput" mat-flat-button color="primary" type="submit" (click)="changeForm('update')">Update Contract</button>
+            </div>
+        </form>
+    </body>
+</html>
