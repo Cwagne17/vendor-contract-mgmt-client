@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ContractFilterComponent } from './components/contract-filter/contract-filter.component';
 import { ContractFormComponent } from './components/contract-form/contract-form.component';
 import { Contract } from '../../types/contract';

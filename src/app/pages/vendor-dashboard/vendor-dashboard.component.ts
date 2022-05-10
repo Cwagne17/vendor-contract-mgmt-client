@@ -69,9 +69,7 @@ export class VendorDashboardComponent implements OnInit {
   }
 
   searchVendors() {
-    console.log(this.query);
     this.vendorService.searchVendors(this.query).then((vendors: Vendor[]) => {
-      console.log(vendors);
       this.vendors = vendors;
     });
   }

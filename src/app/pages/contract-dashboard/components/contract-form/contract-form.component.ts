@@ -2,8 +2,6 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { VendorService } from 'src/app/services/vendor.service';
 import { ContractService } from '../../../../services/contract.service';
-import { SnackbarService } from '../../../../services/snackbar.service';
-import { WorkTypeService } from '../../../../services/work-type.service';
 import { Contract, CreateContractDto, UpdateContractDto } from '../../../../types/contract';
 import { PaymentInfo } from '../../../../types/payment-info';
 import { Vendor } from '../../../../types/vendor';
@@ -46,7 +44,7 @@ export class ContractFormComponent implements OnInit {
     private readonly contractService: ContractService,
     private readonly vendorService: VendorService,
     @Inject(MAT_DIALOG_DATA) public data: {contract?: Contract, action: ContractForm.Actions}
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     if (this.data.contract){
@@ -58,10 +56,10 @@ export class ContractFormComponent implements OnInit {
   async contractAction(){
     switch(this.type){
       case ContractForm.Actions.CREATE:
-        // await this.contractService.createContract(this.contract.vendor.id, {...this.contract} as CreateContractDto);
+        await this.contractService.createContract(this.contract.vendor.id, {...this.contract} as CreateContractDto);
         break;
       case ContractForm.Actions.UPDATE:
-        // this.contractService.updateContract(this.contract.vendor.id, this.contract.id, {...this.contract} as UpdateContractDto);
+        this.contractService.updateContract(this.contract.vendor.id, this.contract.id, {...this.contract} as UpdateContractDto);
         break;
     }
   }
@@ -85,9 +83,10 @@ export class ContractFormComponent implements OnInit {
           this.contract.condition = event.target.value;
           break;
         case "vendor":
-          // check if the vendor exists otherwise throw an error
-          this.vendorService.getVendorByName(event.target.value);
-          // set contract.workType to the vendor's workType
+          this.vendorService.getVendorByName(event.target.value).then((vendor: Vendor) => {
+            this.contract.vendor = vendor;
+            this.contract.workType = vendor.workType;
+          });
           break;
       }
     }
