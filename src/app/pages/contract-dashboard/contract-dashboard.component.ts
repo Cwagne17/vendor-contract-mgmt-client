@@ -1,48 +1,40 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { SearchContractsDto } from 'src/app/types/contract';
+import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 import { ContractFilterComponent } from './components/contract-filter/contract-filter.component';
 import { ContractFormComponent } from './components/contract-form/contract-form.component';
-
+import { Contract } from 'src/app/types/contract';
 @Component({
   selector: 'app-contract-dashboard',
   templateUrl: './contract-dashboard.component.html',
   styleUrls: ['./contract-dashboard.component.scss']
 })
 export class ContractDashboardComponent implements OnInit {
+  displayedColumns: string[] = ['vendor_name', 'date_range', 'amount_due', 'paid', 'work_id', 'butt'];
+  contracts: Contract[] = [];
 
-  query: SearchContractsDto = {
-    work_type: []
-  }
-
-  constructor(
-    @Inject(MatDialog)private dialog : MatDialog
-  ) { }
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    console.log
-  }
+    console.log('Called ngOnInit method');
+  };
 
-  openFilter(): void {
+  openFilter() {
     const dialogRef = this.dialog.open(ContractFilterComponent);
-    dialogRef.afterClosed().subscribe((result: SearchContractsDto) => {
-      this.query.work_type = result.work_type;
-      console.log(`Dialog result: ${this.query.work_type}`)
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`)
     });
   }
 
-  openForm(): void {
-    // const data = vendor ? { vendor: vendor, action: VendorForm.Actions.READ } : { action: VendorForm.Actions.CREATE }; 
-    const dialogRef = this.dialog.open(
+  openForm() {
+    const dialogRef2 = this.dialog.open(
       ContractFormComponent, {
-        height: '100%',
-        width: '50%',
-        // data: data
-      }
-    );
-    dialogRef.updatePosition({ top: '0px', left: `50%`});
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("closed")
+      height: '100%',
+      width: '50%',
+    });
+    dialogRef2.updatePosition({ top: '0px', left: `50%`});
+    dialogRef2.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`)
     });
   }
 
