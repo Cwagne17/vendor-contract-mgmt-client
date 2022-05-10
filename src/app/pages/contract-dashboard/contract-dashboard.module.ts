@@ -1,30 +1,38 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-//import { VendorDashboardComponent } from '../vendor-dashboard.component';
-//import { VendorFilterComponent } from './components/vendor-filter/vendor-filter.component';
-//import { VendorFormComponent } from './components/vendor-form/vendor-form.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
-//import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {MatDialogModule} from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule} from '@angular/material/table';
-import { VendorFormService } from '../../services/vendor-form.services';
 import { ContractDashboardComponent } from './contract-dashboard.component';
-
+import { ContractFilterComponent } from './components/contract-filter/contract-filter.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatChipsModule } from '@angular/material/chips';
+import { ContractFormComponent } from './components/contract-form/contract-form.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { SharedModule } from '../../shared/shared.module';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
-    ContractDashboardComponent
+    ContractDashboardComponent,
+    ContractFilterComponent,
+    ContractFormComponent
   ],
   imports: [
     CommonModule,
+    MatChipsModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
@@ -37,6 +45,9 @@ import { ContractDashboardComponent } from './contract-dashboard.component';
     ReactiveFormsModule,
     MatDialogModule,
     MatTableModule,
+    MatButtonToggleModule,
+    MatNativeDateModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',

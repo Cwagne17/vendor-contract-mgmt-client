@@ -13,10 +13,15 @@ import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatDialogModule} from '@angular/material/dialog';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule} from '@angular/material/table';
-import { VendorFormService } from '../../services/vendor-form.services';
+import { SharedModule } from '../../shared/shared.module';
+import { MatSelectModule } from '@angular/material/select';
+import { MatOptionModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -30,6 +35,8 @@ import { VendorFormService } from '../../services/vendor-form.services';
     LayoutModule,
     MatToolbarModule,
     MatButtonModule,
+    MatChipsModule,
+    MatCheckboxModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
@@ -38,7 +45,10 @@ import { VendorFormService } from '../../services/vendor-form.services';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
+    MatSelectModule,
+    MatOptionModule,
     MatTableModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',
@@ -52,3 +62,5 @@ import { VendorFormService } from '../../services/vendor-form.services';
   schemas: [NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA]
 })
 export class VendorDashboardModule { }
+
+

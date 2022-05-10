@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WorktypeDashboardComponent } from './worktype-dashboard.component';
+import { ContractFormComponent } from './contract-form.component';
 
-describe('WorktypeDashboardComponent', () => {
-  let component: WorktypeDashboardComponent;
-  let fixture: ComponentFixture<WorktypeDashboardComponent>;
+describe('ContractFormComponent', () => {
+  let component: ContractFormComponent;
+  let fixture: ComponentFixture<ContractFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WorktypeDashboardComponent ]
+      declarations: [ ContractFormComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WorktypeDashboardComponent);
+    fixture = TestBed.createComponent(ContractFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

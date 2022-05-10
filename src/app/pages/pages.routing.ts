@@ -18,11 +18,6 @@ const pages_routes: Routes = [
                 loadChildren:
                     () => import('./contract-dashboard/contract-dashboard.module').then( m => m.ContractDashboardModule)
             },
-            {
-                path: 'worktype',
-                loadChildren:
-                    () => import('./worktype-dashboard/worktype-dashboard.module').then( m => m.WorkTypeDashboardModule)
-            },
             { path: '**', redirectTo: 'vendor', pathMatch: 'full' }
         ]
     },
