@@ -7,6 +7,7 @@ executors:
       - image: cimg/node:17.2.0
 orbs:
   node: circleci/node@5.0.2
+  aws-s3: circleci/aws-s3@3.0.0
 
 jobs:
   lint-project:
@@ -30,6 +31,24 @@ jobs:
           command: >
             npm install 
             npm run test
+  
+  deploy-s3:
+    executor: node-executor
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Build Application
+          command: yarn ng build --configuration production --no-progress
+      - run: ls -al
+      - aws-s3/sync:
+          aws-region: AWS_N_VA_REGION
+          aws-access-key-id: AWS_ACCESS_KEY_ID_S3
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY_S3
+          from: ./dist/
+          to: s3://vendor-contract-mgmt-client
 
 workflows:
   test-lint-project:
@@ -44,3 +63,11 @@ workflows:
             branches:
               ignore:
                 - /main/
+  deploy-production:
+    jobs:
+      - deploy-s3:
+          context:
+            - AWS
+          filters:
+            branches:
+              only: /main/

@@ -13,10 +13,12 @@ import { Inject } from '@angular/core';
 })
 export class VendorDashboardComponent implements OnInit {
   vendors: Vendor[] = [];
-  displayedColumns: string[] = ['vendor_name', 'contact_phone_number', 'status', 'workType'/*, 'butt'*/];
+  displayedColumns: string[] = ['vendor_name', 'contact_phone_number', 'status', 'workType'];
 
   query: SearchVendorsDto = {
-    work_type: []
+    work_type: [],
+    text: "",
+    status: []
   }
 
   constructor(
@@ -25,28 +27,27 @@ export class VendorDashboardComponent implements OnInit {
   ) {}
   
   async ngOnInit(): Promise<void> {
-    this.vendorService.searchVendors(this.query).then((vendors: Vendor[]) => {
-      this.vendors = vendors;
-      console.log(vendors);
-    });
+    this.searchVendors();
   };
 
   openFilter() {
-    const dialogRef = this.dialog.open(VendorFilterComponent);
+    const dialogRef = this.dialog.open(
+      VendorFilterComponent,
+      {
+        data: this.query
+      }
+    );
 
     dialogRef.afterClosed().subscribe((result: SearchVendorsDto) => {
       this.query.work_type = result.work_type;
       this.query.status = result.status;
 
-      console.log(`Dialog result: ${this.query.work_type}`)
-      console.log(`Dialog result: ${this.query.status}`)
+      this.searchVendors();
     });
   }
 
   openForm(vendor?: Vendor) {
-    console.log(vendor);
     const data = vendor ? { vendor: vendor, action: VendorForm.Actions.READ } : { action: VendorForm.Actions.CREATE }; 
-
     const dialogRef2 = this.dialog.open(
       VendorFormComponent, {
         height: '100%',
@@ -54,24 +55,25 @@ export class VendorDashboardComponent implements OnInit {
         data: data
       }
     );
-
     dialogRef2.updatePosition({ top: '0px', left: `50%`});
-    
     dialogRef2.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`)
+      this.searchVendors();
+    });
+  }
+
+  changeText(event: any) {
+    if (typeof event === "object") {
+      this.query.text = event.target.value;
+    }
+    this.searchVendors();
+  }
+
+  searchVendors() {
+    console.log(this.query);
+    this.vendorService.searchVendors(this.query).then((vendors: Vendor[]) => {
+      console.log(vendors);
+      this.vendors = vendors;
     });
   }
   
-  openDialog(){
-    this.dialog.open(VendorFilterComponent, {
-      height : '25vw',
-      width : '40vw'
-    });
-  }
-
-  //openFilter(): void {
-  //  const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
-  //    width: '250px',
-  //    data: {name: this.name, animal: this.animal},
-  // };
 }
