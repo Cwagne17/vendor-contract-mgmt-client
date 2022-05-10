@@ -1,9 +1,13 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { ContractService } from 'src/app/services/contract.service';
-import { SnackbarService } from 'src/app/services/snackbar.service';
-import { WorkTypeService } from 'src/app/services/work-type.service';
-import { Contract, CreateContractDto, UpdateContractDto } from 'src/app/types/contract';
+import { VendorService } from 'src/app/services/vendor.service';
+import { ContractService } from '../../../../services/contract.service';
+import { SnackbarService } from '../../../../services/snackbar.service';
+import { WorkTypeService } from '../../../../services/work-type.service';
+import { Contract, CreateContractDto, UpdateContractDto } from '../../../../types/contract';
+import { PaymentInfo } from '../../../../types/payment-info';
+import { Vendor } from '../../../../types/vendor';
+import { WorkType } from '../../../../types/work-type';
 
 export namespace ContractForm {
   export enum Actions {
@@ -25,27 +29,23 @@ export class ContractFormComponent implements OnInit {
   formTitle: string = 'Contract Details';
   disableInput: boolean = true;
 
-  //Data Attributes
-  statuses: Contract.StatusTypes[] = Object.values(Contract.StatusTypes);
-  selected: any;
   contract: Contract = {
     id: '',
-    vendor_name: '',
-    start_date: '',
-    end_date: '',
     amount: 0,
-    conditions: '',
+    contract_date: new Date(),
+    contract_end_date: new Date(),
     memo: '',
-    work_type: {
-      id: '',
-      type: '',
-    }
+    condition: '',
+    vendor: {} as Vendor,
+    workType: {} as WorkType,
+    paymentInfo: [] as PaymentInfo[]
   };
 
   constructor(
-    private contractService: ContractService,
-    private workTypeService: WorkTypeService,
-    private snackbarService: SnackbarService,
+    private readonly contractService: ContractService,
+    private readonly workTypeService: WorkTypeService,
+    private readonly vendorService: VendorService,
+    private readonly snackbarService: SnackbarService,
     @Inject(MAT_DIALOG_DATA) public data: {contract?: Contract, action: ContractForm.Actions}
   ) { }
 
@@ -59,11 +59,10 @@ export class ContractFormComponent implements OnInit {
   async contractAction(){
     switch(this.type){
       case ContractForm.Actions.CREATE:
-        const createContractDto: CreateContractDto = this.mapContractToCreateDto();
-        await this.contractService.createContract(createContractDto);
+        await this.contractService.createContract(this.contract.vendor.id, {...this.contract} as CreateContractDto);
         break;
       case ContractForm.Actions.UPDATE:
-        this.contractService.updateContract(this.contract.id, {...this.contract} as UpdateContractDto);
+        this.contractService.updateContract(this.contract.vendor.id, this.contract.id, {...this.contract} as UpdateContractDto);
         break;
     }
   }
@@ -71,26 +70,25 @@ export class ContractFormComponent implements OnInit {
   change(event:any, property: string){
     if(typeof event === "object"){
       switch(property){
-        case 'vendor_name':
-          this.contract.vendor_name = event.target.value;
-          break;
-        case 'start_date':
-          this.contract.start_date = event.target.value;
-          break;
-        case 'end_date':
-          this.contract.end_date = event.target.value;
-          break;
-        case 'amount':
+        case "amount":
           this.contract.amount = event.target.value;
           break;
-        case 'conditions':
-          this.contract.conditions = event.target.value;
+        case "contract_date":
+          this.contract.contract_date = event.target.value;
           break;
-        case 'memo':
+        case "contract_end_date":
+          this.contract.contract_end_date = event.target.value;
+          break;
+        case "memo":
           this.contract.memo = event.target.value;
           break;
-        case 'work_type':
-          this.contract.work_type.type = event.target.value;
+        case "condition":
+          this.contract.condition = event.target.value;
+          break;
+        case "vendor":
+          // check if the vendor exists otherwise throw an error
+          this.vendorService.getVendorByName(event.target.value);
+          // set contract.workType to the vendor's workType
           break;
       }
     }
@@ -104,19 +102,12 @@ export class ContractFormComponent implements OnInit {
         this.disableInput = false;
         break;
       case ContractForm.Actions.UPDATE :
-        this.formTitle = "Update Vendor";
+        this.formTitle = "Update Contract";
         this.disableInput = false;
         break;
       default:
         break;
     }
-  }
-
-  mapContractToCreateDto(): CreateContractDto {
-    return {
-      work_id: this.contract.workType.id,
-      ...this.contract
-    } as CreateContractDto;
   }
 
 }

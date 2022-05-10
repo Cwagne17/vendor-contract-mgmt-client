@@ -39,7 +39,7 @@ export interface CreateVendorDto {
 
     memo?: string
 
-    work_id: string
+    workType: string
 }
 
 export interface UpdateVendorDto {

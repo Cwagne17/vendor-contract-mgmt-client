@@ -6,6 +6,10 @@ export const VENDOR_ROUTES = {
         return `${environment.apiURL}/vendor`;
     },
 
+    GET_VENDOR_BY_NAME(name: string): string {
+        return `${environment.apiURL}/vendor/${name}`;
+    },
+
     SEARCH_VENDORS(query: any): string {
         return `${environment.apiURL}/vendors?${querystring.stringify(query)}`;
     },

@@ -19,7 +19,7 @@ export interface Contract {
 
     workType: WorkType
 
-    paymentInfo: PaymentInfo
+    paymentInfo: PaymentInfo[]
 }
 
 export interface CreateContractDto {

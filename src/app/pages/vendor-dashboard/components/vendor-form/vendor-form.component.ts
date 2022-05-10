@@ -1,9 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { SnackbarService } from 'src/app/services/snackbar.service';
-import { SNACKBAR_COLOR } from 'src/app/shared/snackbar/snackbar.component';
 import { VendorService } from '../../../../services/vendor.service';
-import { WorkTypeService } from '../../../../services/work-type.service';
 import { CreateVendorDto, UpdateVendorDto, Vendor } from '../../../../types/vendor';
 
 export namespace VendorForm {
@@ -27,7 +24,7 @@ export class VendorFormComponent implements OnInit {
 
   // Data Attributes
   statuses: Vendor.StatusTypes[] = Object.values(Vendor.StatusTypes);
-  selected: any;
+
   vendor: Vendor = {
     id: '',
     vendor_name: '',
@@ -40,14 +37,12 @@ export class VendorFormComponent implements OnInit {
     memo: '',
     workType: {
       id: '',
-      type: '',
+      type: ''
     }
   };
 
   constructor(
     private vendorService: VendorService,
-    private workTypeService: WorkTypeService,
-    private snackbarService: SnackbarService,
     @Inject(MAT_DIALOG_DATA) public data: { vendor?: Vendor, action: VendorForm.Actions }
   ) {}
 
@@ -124,8 +119,8 @@ export class VendorFormComponent implements OnInit {
 
   mapVendorToCreateDto(): CreateVendorDto {
     return {
-      work_id: this.vendor.workType.id,
-      ...this.vendor
+      ...this.vendor,
+      workType: this.vendor.workType.type
     } as CreateVendorDto;
   }
 

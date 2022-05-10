@@ -60,6 +60,26 @@ export class VendorService implements IVendorService {
     });
   }
 
+  getVendorByName(name: string): Promise<Vendor> {
+    return new Promise((resolve, reject) => {
+      this.auth.initHeaders();
+      this.http
+        .get(
+          VENDOR_ROUTES.GET_VENDOR_BY_NAME(name), 
+          { headers: this.auth.headers }
+        )
+        .pipe(retry(3))
+        .toPromise()
+        .then((res: any) => {
+          resolve(res);
+        },
+        (error) => {
+          this.snackbarService.sendNotificationByError(error);
+          reject(error);
+        });
+    });
+  }
+
   searchVendors(query: SearchVendorsDto): Promise<Vendor[]> {
     return new Promise((resolve, reject) => {
       this.auth.initHeaders();
