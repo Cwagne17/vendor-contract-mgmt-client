@@ -30,6 +30,7 @@ export class ContractService implements IContractService {
       .pipe(retry(3))
       .toPromise()
       .then((res: any) => {
+        this.snackbarService.sendSuccessNotification("Contract successfully created.");
         resolve(res);
       },
       (error) => {
@@ -71,6 +72,7 @@ export class ContractService implements IContractService {
       .pipe(retry(3))
       .toPromise()
       .then((res: any) => {
+        this.snackbarService.sendSuccessNotification("Contract successfully updated.");
         resolve(res);
       },
       (error) => {
@@ -91,6 +93,7 @@ export class ContractService implements IContractService {
       .pipe(retry(3))
       .toPromise()
       .then((res: any) => {
+        this.snackbarService.sendSuccessNotification("Payment Info successfully deleted.");
         resolve(res);
       },
       (error) => {
@@ -100,24 +103,8 @@ export class ContractService implements IContractService {
     });
   }
 
-  downloadContract(vendorId: string, id: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.auth.initHeaders();
-      this.http
-      .get(
-        CONTRACT_ROUTES.DOWNLOAD_CONTRACT(vendorId, id), 
-        { headers: this.auth.headers }
-      )
-      .pipe(retry(3))
-      .toPromise()
-      .then((res: any) => {
-        resolve(res);
-      },
-      (error) => {
-        this.snackbarService.sendNotificationByError(error);
-        reject(error);
-      });
-    });
+  downloadContract(vendorId: string, id: string): void {
+    console.log('method not yet implemented');
   }
 
 

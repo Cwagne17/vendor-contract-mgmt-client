@@ -30,6 +30,7 @@ export class PaymentInfoService implements IPaymentInfoService {
       .pipe(retry(3))
       .toPromise()
       .then((res: any) => {
+        this.snackbarService.sendSuccessNotification("Payment Info successfully added.");
         resolve(res);
       },
       (error) => {
@@ -58,6 +59,7 @@ export class PaymentInfoService implements IPaymentInfoService {
       });
     });
   }
+
   updatePayment(vendorId: string, contractId: string, id: string, updatePaymentDto: UpdatePaymentInfoDto): Promise<void> {
     return new Promise((resolve, reject) => {
       this.auth.initHeaders();
@@ -70,6 +72,7 @@ export class PaymentInfoService implements IPaymentInfoService {
       .pipe(retry(3))
       .toPromise()
       .then((res: any) => {
+        this.snackbarService.sendSuccessNotification("Payment Info successfully updated.");
         resolve(res);
       },
       (error) => {
@@ -90,6 +93,7 @@ export class PaymentInfoService implements IPaymentInfoService {
       .pipe(retry(3))
       .toPromise()
       .then((res: any) => {
+        this.snackbarService.sendSuccessNotification("Payment Info successfully deleted.");
         resolve(res);
       },
       (error) => {

@@ -30,6 +30,7 @@ export class VendorService implements IVendorService {
       .pipe(retry(3))
       .toPromise()
       .then((res: any) => {
+        this.snackbarService.sendSuccessNotification("Vendor successfully created.");
         resolve(res);
       },
       (error) => {
@@ -51,6 +52,7 @@ export class VendorService implements IVendorService {
       .pipe(retry(3))
       .toPromise()
       .then((res: any) => {
+        this.snackbarService.sendSuccessNotification("Vendor successfully updated.");
         resolve(res);
       },
       (error) => {
@@ -81,6 +83,7 @@ export class VendorService implements IVendorService {
   }
 
   searchVendors(query: SearchVendorsDto): Promise<Vendor[]> {
+    console.log(VENDOR_ROUTES.SEARCH_VENDORS(query))
     return new Promise((resolve, reject) => {
       this.auth.initHeaders();
       this.http

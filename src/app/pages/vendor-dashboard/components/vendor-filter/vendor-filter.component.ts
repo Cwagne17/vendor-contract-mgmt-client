@@ -40,11 +40,13 @@ export class VendorFilterComponent implements OnInit {
   ngOnInit(): void {
     this.query.work_type = this.data.work_type ? this.data.work_type : [];
     this.query.status = this.data.status ? this.data.status : [];
+    for (let i=0; i < this.query.status.length; i++) {
+      this.checBoxChange(true, this.query.status[i]);
+    }
   }
 
 
   add(event: MatChipInputEvent): void {
-
     // Add new chips
     if (event.value) {
       this.query.work_type?.push(event.value);

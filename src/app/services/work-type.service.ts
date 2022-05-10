@@ -30,6 +30,7 @@ export class WorkTypeService implements IWorkTypeService {
         .pipe(retry(3))
         .toPromise()
         .then((res: any) => {
+          this.snackbarService.sendSuccessNotification("Work Type successfully created.");
           resolve(res);
         },
         (error) => {
@@ -71,6 +72,7 @@ export class WorkTypeService implements IWorkTypeService {
         .pipe(retry(3))
         .toPromise()
         .then((res: any) => {
+          this.snackbarService.sendSuccessNotification("Work Type successfully updated.");
           resolve(res);
         },
         (error) => {
@@ -91,6 +93,7 @@ export class WorkTypeService implements IWorkTypeService {
         .pipe(retry(3))
         .toPromise()
         .then((res: any) => {
+          this.snackbarService.sendSuccessNotification("Work Type successfully deleted.");
           resolve(res);
         },
         (error) => {

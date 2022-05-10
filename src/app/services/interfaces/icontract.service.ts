@@ -39,5 +39,5 @@ export interface IContractService {
        * @param vendorId - Request Param vendorId
        * @param id - Request Param contractId
        */
-      downloadContract(vendorId: string, id: string): Promise<void>;
+      downloadContract(vendorId: string, id: string): void;
 }
