@@ -44,7 +44,7 @@ export class ContractFilterComponent implements OnInit {
   remove(type: string): void {
     const index = this.query.work_type?.indexOf(type);
 
-    if (index >= 0) {
+    if (index && index >= 0) {
       this.query.work_type?.splice(index, 1);
     }
   }

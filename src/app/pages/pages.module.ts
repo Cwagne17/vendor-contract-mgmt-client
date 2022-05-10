@@ -3,7 +3,6 @@ import { VendorDashboardModule } from "./vendor-dashboard/vendor-dashboard.modul
 import { PagesComponent } from './pages.component';
 import { PagesRoutingModule } from "./pages.routing";
 import { ContractDashboardModule } from "./contract-dashboard/contract-dashboard.module";
-import { WorkTypeDashboardModule } from "./worktype-dashboard/worktype-dashboard.module";
 import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
@@ -14,7 +13,6 @@ import { SharedModule } from "../shared/shared.module";
         VendorDashboardModule,
         PagesRoutingModule,
         ContractDashboardModule,
-        WorkTypeDashboardModule,
         SharedModule
     ],
     schemas: [

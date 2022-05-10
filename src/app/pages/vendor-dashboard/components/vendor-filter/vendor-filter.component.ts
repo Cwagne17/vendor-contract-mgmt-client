@@ -1,11 +1,12 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import {COMMA, ENTER, N} from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { WorkType } from '../../../../types/work-type';
 import { statusTypes } from '../../../../types/status';
-import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { SearchVendorsDto, Vendor } from 'src/app/types/vendor';
+import { VendorForm } from '../vendor-form/vendor-form.component';
 
 
 @Component({
@@ -30,14 +31,15 @@ export class VendorFilterComponent implements OnInit {
     {name: Vendor.StatusTypes.INACTIVE, state: false},
     {name: Vendor.StatusTypes.HAS_ISSUES, state: false}
   ];
-  constructor(private dialogRef: MatDialogRef<VendorFilterComponent>){
-
-  }
+  constructor(
+    private dialogRef: MatDialogRef<VendorFilterComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Partial<SearchVendorsDto>
+    ) { }
 
   
   ngOnInit(): void {
-    console.log();
-
+    this.query.work_type = this.data.work_type ? this.data.work_type : [];
+    this.query.status = this.data.status ? this.data.status : [];
   }
 
 
