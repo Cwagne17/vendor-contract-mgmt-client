@@ -4,7 +4,7 @@
 </mat-form-field>
 <button mat-flat-button color="primary" class = "searchbutt">Search</button>
 <button mat-flat-button  color="primary" class = "filterbutt" >Filter</button>
-<button mat-flat-button  color="primary" class = "createbutt">Create Contract</button>
+<button mat-flat-button  (click)="openForm()" color="primary" class = "createbutt">Create Contract</button>
 <table mat-table [dataSource]="contracts" class="mat-elevation-z8 table">
 
   <ng-container matColumnDef="vendor_name">
@@ -42,4 +42,3 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-

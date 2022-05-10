@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { ContractFilterComponent } from './components/contract-filter/contract-filter.component';
 import { ContractFormComponent } from './components/contract-form/contract-form.component';
-import { Contract } from 'src/app/types/contract';
+import { Contract } from '../../types/contract';
 @Component({
   selector: 'app-contract-dashboard',
   templateUrl: './contract-dashboard.component.html',
@@ -28,7 +28,7 @@ export class ContractDashboardComponent implements OnInit {
 
   openForm() {
     const dialogRef2 = this.dialog.open(
-      ContractFormComponent, {
+      ContractFormComponent, { 
       height: '100%',
       width: '50%',
     });

@@ -22,7 +22,6 @@ export namespace ContractForm {
   templateUrl: './contract-form.component.html',
   styleUrls: ['./contract-form.component.scss']
 })
-
 export class ContractFormComponent implements OnInit {
   //Form Attributes
   type: string = ContractForm.Actions.READ;
@@ -32,20 +31,20 @@ export class ContractFormComponent implements OnInit {
   contract: Contract = {
     id: '',
     amount: 0,
-    contract_date: new Date(),
-    contract_end_date: new Date(),
+    contract_date: new Date(0),
+    contract_end_date: new Date(0),
     memo: '',
     condition: '',
-    vendor: {} as Vendor,
+    vendor: {
+      vendor_name: ''
+    } as Vendor,
     workType: {} as WorkType,
     paymentInfo: [] as PaymentInfo[]
   };
 
   constructor(
     private readonly contractService: ContractService,
-    private readonly workTypeService: WorkTypeService,
     private readonly vendorService: VendorService,
-    private readonly snackbarService: SnackbarService,
     @Inject(MAT_DIALOG_DATA) public data: {contract?: Contract, action: ContractForm.Actions}
   ) { }
 
@@ -59,10 +58,10 @@ export class ContractFormComponent implements OnInit {
   async contractAction(){
     switch(this.type){
       case ContractForm.Actions.CREATE:
-        await this.contractService.createContract(this.contract.vendor.id, {...this.contract} as CreateContractDto);
+        // await this.contractService.createContract(this.contract.vendor.id, {...this.contract} as CreateContractDto);
         break;
       case ContractForm.Actions.UPDATE:
-        this.contractService.updateContract(this.contract.vendor.id, this.contract.id, {...this.contract} as UpdateContractDto);
+        // this.contractService.updateContract(this.contract.vendor.id, this.contract.id, {...this.contract} as UpdateContractDto);
         break;
     }
   }

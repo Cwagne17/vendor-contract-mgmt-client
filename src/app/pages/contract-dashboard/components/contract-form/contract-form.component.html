@@ -3,7 +3,7 @@
         <h3>{{formTitle}}</h3>
         <form>
             <div class="form-row">
-                <mat-form-field appearance="outline" class="vName">
+                <mat-form-field appearance="outline">
                     <mat-label>Vendor Name</mat-label>
                     <input
                         matInput
@@ -18,7 +18,7 @@
             </div>
 
             <div class="form-row">
-                <mat-form-field appearance="fill">
+                <mat-form-field appearance="outline">
                     <mat-label>Start Date</mat-label>
                     <input 
                         matInput
@@ -34,10 +34,10 @@
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
                 
-                <mat-form-field appearance="fill">
-                    <mat-label>End Date</mat-label>
+                <mat-form-field appearance="outline">
+                    <mat-label>End date</mat-label>
                     <input 
-                        matInput 
+                        matInput
                         [matDatepicker]="picker"
                         (change)="change($event, 'contract_end_date')"
                         [required]="true"
@@ -52,7 +52,7 @@
             </div>
 
             <div class="form-row">
-                <mat-form-field appearance="outline" class="amount">
+                <mat-form-field appearance="outline">
                     <mat-label>Amount</mat-label>
                     <input
                         matInput
@@ -67,7 +67,7 @@
             </div>
 
             <div class="memo-input">
-                <mat-form-field appearance="outline" class="conditions">
+                <mat-form-field appearance="outline">
                     <mat-label>Conditions</mat-label>
                     <input 
                         matInput 
@@ -82,7 +82,7 @@
             </div>         
             
             <div class="memo-input">
-                <mat-form-field appearance="outline" class="memo-input">
+                <mat-form-field appearance="outline">
                     <mat-label>Notes/Memo</mat-label>
                     <input 
                         matInput 

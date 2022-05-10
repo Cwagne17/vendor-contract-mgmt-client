@@ -12,14 +12,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule} from '@angular/material/table';
 import { ContractDashboardComponent } from './contract-dashboard.component';
 import { ContractFilterComponent } from './components/contract-filter/contract-filter.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule } from '@angular/forms';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { ContractFormComponent } from './components/contract-form/contract-form.component';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { SharedModule } from '../../shared/shared.module';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     ContractDashboardComponent,
@@ -29,13 +31,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
   imports: [
     CommonModule,
     MatChipsModule,
-    MatIconModule,
-    MatButtonModule,
-    MatDialogModule,
     MatCheckboxModule,
-    FormsModule,
-    MatFormFieldModule,
-    MatInputModule,
     MatDatepickerModule,
     LayoutModule,
     MatToolbarModule,
@@ -49,6 +45,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
     ReactiveFormsModule,
     MatDialogModule,
     MatTableModule,
+    MatButtonToggleModule,
+    MatNativeDateModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',
