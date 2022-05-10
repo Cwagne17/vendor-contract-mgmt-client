@@ -1,32 +1,40 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { SearchContractsDto } from 'src/app/types/contract';
 import { ContractFilterComponent } from './components/contract-filter/contract-filter.component';
-
+import { ContractFormComponent } from './components/contract-form/contract-form.component';
+import { Contract } from '../../types/contract';
 @Component({
   selector: 'app-contract-dashboard',
   templateUrl: './contract-dashboard.component.html',
   styleUrls: ['./contract-dashboard.component.scss']
 })
 export class ContractDashboardComponent implements OnInit {
+  displayedColumns: string[] = ['vendor_name', 'date_range', 'amount_due', 'paid', 'work_id', 'butt'];
+  contracts: Contract[] = [];
 
-  query: SearchContractsDto = {
-    work_type: []
-  }
-
-  constructor(
-    @Inject(MatDialog)private dialog : MatDialog
-  ) { }
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {
-    console.log
+    console.log('Called ngOnInit method');
+  };
+
+  openFilter() {
+    const dialogRef = this.dialog.open(ContractFilterComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`)
+    });
   }
 
-  openFilter(): void{
-    const dialogRef = this.dialog.open(ContractFilterComponent);
-    dialogRef.afterClosed().subscribe((result: SearchContractsDto) => {
-      this.query.work_type = result.work_type;
-      console.log(`Dialog result: ${this.query.work_type}`)
+  openForm() {
+    const dialogRef2 = this.dialog.open(
+      ContractFormComponent, { 
+      height: '100%',
+      width: '50%',
+    });
+    dialogRef2.updatePosition({ top: '0px', left: `50%`});
+    dialogRef2.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`)
     });
   }
 

@@ -24,6 +24,7 @@
     "@fortawesome/angular-fontawesome": "^0.10.2",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
+    "@mat-datetimepicker/core": "^9.0.46",
     "ngx-cookie-service": "^13.2.0",
     "query-string": "^7.1.1",
     "rxjs": "~7.5.0",

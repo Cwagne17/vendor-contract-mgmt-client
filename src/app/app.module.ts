@@ -8,12 +8,10 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './shared/shared.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ContractFormComponent } from './contract-form/contract-form.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ContractFormComponent
+    AppComponent
   ],
   imports: [
     AppRoutingModule,

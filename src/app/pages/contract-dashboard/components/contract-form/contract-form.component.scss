@@ -1,0 +1,16 @@
+.form-row {
+    font-size: 12px;
+    
+    mat-form-field {
+        margin-right: 5rem;
+    }
+}
+
+.memo-input {
+    width: 100%;
+}
+
+.button-row {
+    display: flex;
+    justify-content: center;
+}
