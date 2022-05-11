@@ -1,3 +1,4 @@
+@import 'src/vars';
 .form-row {
     font-size: 12px;
     
@@ -12,5 +13,9 @@
 
 .button-row {
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+}
+
+.delete-button {
+    color: color-danger()
 }

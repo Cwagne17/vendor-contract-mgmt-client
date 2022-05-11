@@ -1,0 +1,51 @@
+<h3>{{formTitle}}</h3>
+<form>
+    
+    <div class="form-row">
+        <mat-form-field appearance="outline">
+            <mat-label>Date</mat-label>
+            <input 
+                matInput 
+                [matDatepicker]="picker"
+            >
+            <mat-hint>YYYY/MM/DD</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <div class="form-row">
+        <mat-form-field appearance="outline">
+            <mat-label>Check Number</mat-label>
+            <input
+                matInput
+                [required]="true"
+                [disabled]="this.disableInput"
+            >
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Amount</mat-label>
+            <input
+                matInput
+                [required]="true"
+                [disabled]="this.disableInput"
+            >
+        </mat-form-field>
+    </div>
+
+    <div class="form-row">
+        <mat-form-field appearance="outline">
+            <mat-label>Memo</mat-label>
+            <input
+                matInput
+                [required]="true"
+                [disabled]="this.disableInput"
+            >
+        </mat-form-field>
+    </div>
+
+
+
+
+</form>

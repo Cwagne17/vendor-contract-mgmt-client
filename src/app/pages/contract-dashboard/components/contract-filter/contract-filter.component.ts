@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { WorkType } from '../../../../types/work-type';
 
 import {COMMA, ENTER, N} from '@angular/cdk/keycodes';
@@ -18,42 +18,40 @@ export class ContractFilterComponent implements OnInit {
 
   query: SearchContractsDto = {
     work_type: []
-
   };
+
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
   addOnBlur = true;
 
 
-  constructor(private dialogRef: MatDialogRef<ContractFilterComponent>) { }
+  constructor(
+    private dialogRef: MatDialogRef<ContractFilterComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Partial<SearchContractsDto>
+  ) { }
 
   ngOnInit(): void {
-    console.log;
+    this.query.work_type = this.data.work_type ? this.data.work_type : [];
   }
 
   add(event: MatChipInputEvent): void {
-
-    // Add new chips
     if (event.value) {
       this.query.work_type?.push(event.value);
     }
-
-    // Clear the input value
     event.chipInput!.clear();
   }
 
   remove(type: string): void {
     const index = this.query.work_type?.indexOf(type);
-
-    if (index && index >= 0) {
+    if (index >= 0) {
       this.query.work_type?.splice(index, 1);
     }
   }
-  filterClear(): void{
-    this.query.work_type = [];
-  }
-
+  
   filterApply(): void{
     this.dialogRef.close(this.query);    
   }
 
+  filterClear(): void{
+    this.query.work_type = [];
+  }
 }
