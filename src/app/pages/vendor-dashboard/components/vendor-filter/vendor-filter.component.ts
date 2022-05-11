@@ -1,12 +1,8 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
-import {COMMA, ENTER, N} from '@angular/cdk/keycodes';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { WorkType } from '../../../../types/work-type';
-import { statusTypes } from '../../../../types/status';
-import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SearchVendorsDto, Vendor } from 'src/app/types/vendor';
-import { VendorForm } from '../vendor-form/vendor-form.component';
 
 
 @Component({
@@ -47,18 +43,14 @@ export class VendorFilterComponent implements OnInit {
 
 
   add(event: MatChipInputEvent): void {
-    // Add new chips
     if (event.value) {
       this.query.work_type?.push(event.value);
     }
-
-    // Clear the input value
     event.chipInput!.clear();
   }
 
   remove(type: string): void {
     const index = this.query.work_type?.indexOf(type);
-
     if (index >= 0) {
       this.query.work_type?.splice(index, 1);
     }
@@ -83,16 +75,11 @@ export class VendorFilterComponent implements OnInit {
 
   }
 
-
   filterClear(): void{
     this.query.work_type = [];
 
     for (let i = 0; i < this.statusesTest.length; i++) {
       this.statusesTest[i].state = false;
+    }
   }
-  }
-
-
-
 }
-

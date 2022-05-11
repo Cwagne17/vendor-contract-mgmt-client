@@ -48,15 +48,15 @@ export class VendorDashboardComponent implements OnInit {
 
   openForm(vendor?: Vendor) {
     const data = vendor ? { vendor: vendor, action: VendorForm.Actions.READ } : { action: VendorForm.Actions.CREATE }; 
-    const dialogRef2 = this.dialog.open(
+    const dialogRef = this.dialog.open(
       VendorFormComponent, {
         height: '100%',
         width: '50%',
         data: data
       }
     );
-    dialogRef2.updatePosition({ top: '0px', left: `50%`});
-    dialogRef2.afterClosed().subscribe(result => {
+    dialogRef.updatePosition({ top: '0px', left: `50%`});
+    dialogRef.afterClosed().subscribe(result => {
       this.searchVendors();
     });
   }

@@ -19,6 +19,7 @@ export class ContractService implements IContractService {
   ) {}
   
   createContract(vendorId: string, createContractDto: CreateContractDto): Promise<void> {
+    console.log(createContractDto);
     return new Promise((resolve, reject) => {
       this.auth.initHeaders();
       this.http

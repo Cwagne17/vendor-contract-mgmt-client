@@ -39,7 +39,7 @@ export interface UpdateContractDto extends Partial<CreateContractDto> {}
 export interface SearchContractsDto {
     text?: string
 
-    work_type?: string[]
+    work_type: string[]
 
     sort?: "ASC" | "DESC" | -1 | 1
 }

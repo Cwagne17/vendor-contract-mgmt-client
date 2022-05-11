@@ -1,7 +1,7 @@
 import { Component, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RoutesRecognized } from '@angular/router';
 import { faAddressCard, faBriefcase, faFileLines, faFolder } from '@fortawesome/free-solid-svg-icons';
-import { Subject, takeUntil } from 'rxjs';
+import { filter, pairwise, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-nav-bar',
@@ -19,7 +19,8 @@ export class NavBarComponent implements OnInit, OnDestroy {
   innerWidth: number | undefined;
 
   // Route for 'back' button; default value is the browse page
-  RETURN_ROUTE: string = '/home';
+  RETURN_ROUTE: string = '/';
+  backRoute: string = '/';
 
   constructor(
     private route: Router,
@@ -42,6 +43,11 @@ export class NavBarComponent implements OnInit, OnDestroy {
     this.getReturnRoute();
     this.innerWidth = window.innerWidth;
     this.panelExpanded = this.innerWidth < 900 ? false : true;
+    this.route.events
+      .pipe(filter((evt: any) => evt instanceof RoutesRecognized), pairwise())
+      .subscribe((events: RoutesRecognized[]) => {
+        this.backRoute = events[0].urlAfterRedirects;
+    });
   }
 
   ngOnDestroy(): void {
@@ -71,4 +77,7 @@ export class NavBarComponent implements OnInit, OnDestroy {
       this.innerWidth && this.innerWidth < 650 ? false : true;
   }
 
+  backButton() {
+    this.route.navigate([this.backRoute]);
+  }
 }
