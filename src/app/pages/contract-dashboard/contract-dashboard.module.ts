@@ -22,11 +22,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { SharedModule } from '../../shared/shared.module';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
+import { PaymentInfoFormComponent } from './components/payment-info-form/payment-info-form.component';
 @NgModule({
   declarations: [
     ContractDashboardComponent,
     ContractFilterComponent,
-    ContractFormComponent
+    ContractFormComponent,
+    PaymentInfoFormComponent
   ],
   imports: [
     CommonModule,

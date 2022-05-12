@@ -24,9 +24,17 @@ export class SnackbarService {
     callbacks?: { action: Function; display: string; style?: string }[];
   }> = new Subject();
 
+  sendSuccessNotification(message: string) {
+    this.notification$.next({
+      title: 'Success',
+      message: message,
+      color: SNACKBAR_COLOR.SUCCESS
+    });
+  }
+
   sendNotificationByError(err: HttpErrorResponse) {
     let title: string = 'ERROR';
-    let message: string = err.message;
+    let message: string = err.error.message;
 
     switch (err.status) {
       case 400:
@@ -48,7 +56,7 @@ export class SnackbarService {
         message = 'Something went wrong. Please try again later.';
         break;
     }
-    console.log("thing", message);
+
     this.notification$.next({
       title: title,
       message: message,

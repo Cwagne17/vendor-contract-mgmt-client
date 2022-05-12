@@ -1,105 +1,160 @@
-<html>
-    <body>
-        <h3>{{formTitle}}</h3>
-        <form>
-            <div class="form-row">
-                <mat-form-field appearance="outline">
-                    <mat-label>Vendor Name</mat-label>
-                    <input
-                        matInput
-                        placeholder="Vendor Name"
-                        (change)="change($event, 'vendor')"
-                        [required]="true"
-                        [disabled]="this.disableInput"
-                        [value]="contract.vendor.vendor_name"
-                        (blur)="change($event, 'vendor')"
-                    >
-                </mat-form-field>
-            </div>
 
-            <div class="form-row">
-                <mat-form-field appearance="outline">
-                    <mat-label>Start Date</mat-label>
-                    <input 
-                        matInput
-                        [matDatepicker]="picker"
-                        (change)="change($event, 'contract_date')"
-                        [required]="true"
-                        [disabled]="this.disableInput"
-                        [value]="contract.contract_date"
-                        (blur)="change($event, 'contract_date')"
-                    >
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-                
-                <mat-form-field appearance="outline">
-                    <mat-label>End date</mat-label>
-                    <input 
-                        matInput
-                        [matDatepicker]="picker"
-                        (change)="change($event, 'contract_end_date')"
-                        [required]="true"
-                        [disabled]="this.disableInput"
-                        [value]="contract.contract_end_date"
-                        (blur)="change($event, 'contract_end_date')"
-                    >
-                    <mat-hint>MM/DD/YYYY</mat-hint>
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-            </div>
+<h3>{{formTitle}}</h3>
+<form>
+    <div class="form-row">
+        <mat-form-field appearance="outline">
+            <mat-label>Vendor Name</mat-label>
+            <input
+                matInput
+                placeholder="Vendor Name"
+                (change)="change($event, 'vendor')"
+                [required]="true"
+                [disabled]="this.disableInput"
+                [value]="contract.vendor.vendor_name"
+                (blur)="change($event, 'vendor')"
+            >
+        </mat-form-field>
+    </div>
 
-            <div class="form-row">
-                <mat-form-field appearance="outline">
-                    <mat-label>Amount</mat-label>
-                    <input
-                        matInput
-                        placeholder="Amount"
-                        (change)="change($event, 'amount')"
-                        [required]="true"
-                        [disabled]="this.disableInput"
-                        [value]="contract.amount"
-                        (blur)="change($event, 'amount')"
-                    >
-                </mat-form-field>
-            </div>
+    <div class="form-row">
+        <mat-form-field appearance="outline">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input 
+                    matStartDate 
+                    placeholder="Start date"
+                    [required]="true"
+                    [disabled]="this.disableInput"
+                    [value]="contract.contract_date"
+                    (dateInput)="change($event, 'contract_date')"
+                    (dateChange)="change($event, 'contract_date')"
+                >
+                <input 
+                    matEndDate 
+                    placeholder="End date"
+                    [required]="true"
+                    [disabled]="this.disableInput"
+                    [value]="contract.contract_end_date"
+                    (dateInput)="change($event, 'contract_end_date')"
+                    (dateChange)="change($event, 'contract_end_date')"
+                >
+            </mat-date-range-input>
+            <mat-hint>YYYY/MM/DD – YYYY/MM/DD</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+    </div>
 
-            <div class="memo-input">
-                <mat-form-field appearance="outline">
-                    <mat-label>Conditions</mat-label>
-                    <input 
-                        matInput 
-                        placeholder="Conditions"
-                        (change)="change($event, 'condition')"
-                        [required]="false"
-                        [disabled]="this.disableInput"
-                        [value]="contract.condition"
-                        (blur)="change($event, 'condition')"
-                    >
-                </mat-form-field>
-            </div>         
+    <div class="form-row">
+        <mat-form-field appearance="outline">
+            <mat-label>Amount</mat-label>
+            <input
+                matInput
+                placeholder="Amount"
+                (change)="change($event, 'amount')"
+                [required]="true"
+                [disabled]="this.disableInput"
+                [value]="contract.amount"
+                (blur)="change($event, 'amount')"
+            >
+        </mat-form-field>
+    </div>
+
+    <div class="form-row">
+        <mat-form-field appearance="outline" class="memo-input">
+            <mat-label>Conditions</mat-label>
+            <input 
+                matInput 
+                placeholder="Conditions"
+                (change)="change($event, 'condition')"
+                [required]="false"
+                [disabled]="this.disableInput"
+                [value]="contract.condition"
+                (blur)="change($event, 'condition')"
+            >
+        </mat-form-field>
+    </div>         
+    
+    <div class="form-row">
+        <mat-form-field appearance="outline" class="memo-input">
+            <mat-label>Notes/Memo</mat-label>
+            <input 
+                matInput 
+                placeholder="Notes/Memo"
+                (change)="change($event, 'memo')"
+                [required]="false"
+                [disabled]="this.disableInput"
+                [value]="contract.memo"
+                (blur)="change($event, 'memo')"
+            >
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="this.contract.paymentInfo && this.contract.paymentInfo.length > 0">
+        <table mat-table [dataSource]="this.contract.paymentInfo" class="mat-elevation-z8 table">
+            <ng-container matColumnDef="current_date">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let element">{{element.current_date}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="check_number">
+                <th mat-header-cell *matHeaderCellDef> Check Number </th>
+                <td mat-cell *matCellDef="let element">{{element.check_number}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+                <th mat-header-cell *matHeaderCellDef> Amount </th>
+                <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+            </ng-container>
             
-            <div class="memo-input">
-                <mat-form-field appearance="outline">
-                    <mat-label>Notes/Memo</mat-label>
-                    <input 
-                        matInput 
-                        placeholder="Notes/Memo"
-                        (change)="change($event, 'memo')"
-                        [required]="false"
-                        [disabled]="this.disableInput"
-                        [value]="contract.memo"
-                        (blur)="change($event, 'memo')"
-                    >
-                </mat-form-field>
-            </div>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row
+                *matRowDef="let row; columns: displayedColumns;" 
+                (click)="openPaymentForm(row)"
+                class="element-row"    
+            ></tr>
+        </table>
+    </div>
 
-            <div class="button-row">
-                <button *ngIf="!this.disableInput" mat-flat-button mat-dialog-close color="primary" type="submit" (click)="contractAction()">{{this.formTitle}}</button>
-                <button *ngIf="this.disableInput" mat-flat-button color="primary" type="submit" (click)="changeForm('update')">Update Contract</button>
-            </div>
-        </form>
-    </body>
-</html>
+    <div class="button-row">
+        <button
+            *ngIf="this.type != 'create'"
+            mat-flat-button 
+            color="primary" 
+            type="submit" 
+            (click)="openPaymentForm()"
+        >Add Payment</button>
+        
+        <button *ngIf="!this.disableInput" 
+            mat-flat-button 
+            mat-dialog-close 
+            color="primary" 
+            type="submit" 
+            (click)="contractAction()"
+        >{{this.formTitle}}</button>  
+
+        <button *ngIf="this.disableInput" 
+            mat-flat-button 
+            color="primary" 
+            type="submit" 
+            (click)="changeForm('update')"
+        >Update Contract</button>
+
+        <button *ngIf="this.type != 'create'" 
+            mat-flat-button 
+            mat-dialog-close 
+            type="submit" 
+            (click)="deleteContract()"
+            class="delete-button"
+        >Delete Contract</button>
+    </div>
+    <div class="download-button">
+        <button
+            mat-flat-button
+            class="download-pdf"
+            type="submit"
+            (click)="downloadPdf()"
+        >Download PDF</button>
+    </div>
+</form>
+    

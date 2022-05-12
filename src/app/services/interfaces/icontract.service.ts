@@ -36,8 +36,7 @@ export interface IContractService {
       /**
        * GET request function to download an existing contract storing its PDF in S3
        * 
-       * @param vendorId - Request Param vendorId
-       * @param id - Request Param contractId
+       * @param contract - Contract entity
        */
-      downloadContract(vendorId: string, id: string): Promise<void>;
+      downloadContract(contract: Contract): void;
 }

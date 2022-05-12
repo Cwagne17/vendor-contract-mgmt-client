@@ -6,6 +6,11 @@ import { CreateContractDto, SearchContractsDto, Contract, UpdateContractDto } fr
 import { AuthService } from './auth.service';
 import { IContractService } from './interfaces/icontract.service';
 import { SnackbarService } from './snackbar.service';
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +24,7 @@ export class ContractService implements IContractService {
   ) {}
   
   createContract(vendorId: string, createContractDto: CreateContractDto): Promise<void> {
+    console.log(createContractDto);
     return new Promise((resolve, reject) => {
       this.auth.initHeaders();
       this.http
@@ -30,6 +36,7 @@ export class ContractService implements IContractService {
       .pipe(retry(3))
       .toPromise()
       .then((res: any) => {
+        this.snackbarService.sendSuccessNotification("Contract successfully created.");
         resolve(res);
       },
       (error) => {
@@ -71,6 +78,7 @@ export class ContractService implements IContractService {
       .pipe(retry(3))
       .toPromise()
       .then((res: any) => {
+        this.snackbarService.sendSuccessNotification("Contract successfully updated.");
         resolve(res);
       },
       (error) => {
@@ -91,6 +99,7 @@ export class ContractService implements IContractService {
       .pipe(retry(3))
       .toPromise()
       .then((res: any) => {
+        this.snackbarService.sendSuccessNotification("Payment Info successfully deleted.");
         resolve(res);
       },
       (error) => {
@@ -100,24 +109,16 @@ export class ContractService implements IContractService {
     });
   }
 
-  downloadContract(vendorId: string, id: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.auth.initHeaders();
-      this.http
-      .get(
-        CONTRACT_ROUTES.DOWNLOAD_CONTRACT(vendorId, id), 
-        { headers: this.auth.headers }
-      )
-      .pipe(retry(3))
-      .toPromise()
-      .then((res: any) => {
-        resolve(res);
-      },
-      (error) => {
-        this.snackbarService.sendNotificationByError(error);
-        reject(error);
-      });
-    });
+  downloadContract(contract: Contract): void {
+    const docDefinition = {
+      content: [
+        { text: 'test'}
+      ],
+      styles: {
+
+      }
+    };
+    pdfMake.createPdf(docDefinition).download();
   }
 
 
