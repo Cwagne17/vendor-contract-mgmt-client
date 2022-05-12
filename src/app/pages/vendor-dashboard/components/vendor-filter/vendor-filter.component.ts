@@ -3,6 +3,7 @@ import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { SearchVendorsDto, Vendor } from 'src/app/types/vendor';
+import { VendorDashboardComponent } from '../../vendor-dashboard.component';
 
 
 @Component({
@@ -21,12 +22,6 @@ export class VendorFilterComponent implements OnInit {
   addOnBlur = true;
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  statusesTest: {name: Vendor.StatusTypes, state: boolean}[] = [
-    {name: Vendor.StatusTypes.IN_CONTRACT, state: false}, 
-    {name: Vendor.StatusTypes.ACTIVE, state: false},
-    {name: Vendor.StatusTypes.INACTIVE, state: false},
-    {name: Vendor.StatusTypes.HAS_ISSUES, state: false}
-  ];
   constructor(
     private dialogRef: MatDialogRef<VendorFilterComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Partial<SearchVendorsDto>
@@ -36,11 +31,23 @@ export class VendorFilterComponent implements OnInit {
   ngOnInit(): void {
     this.query.work_type = this.data.work_type ? this.data.work_type : [];
     this.query.status = this.data.status ? this.data.status : [];
-    for (let i=0; i < this.query.status.length; i++) {
-      this.checBoxChange(true, this.query.status[i]);
-    }
   }
 
+  inContract() {
+    return this.query.status?.includes(Vendor.StatusTypes.IN_CONTRACT);
+  }
+
+  hasIssues() {
+    return this.query.status?.includes(Vendor.StatusTypes.HAS_ISSUES);
+  }
+
+  isActive() {
+    return this.query.status?.includes(Vendor.StatusTypes.ACTIVE);
+  }
+
+  isInactive() {
+    return this.query.status?.includes(Vendor.StatusTypes.INACTIVE);
+  }
 
   add(event: MatChipInputEvent): void {
     if (event.value) {
@@ -56,30 +63,23 @@ export class VendorFilterComponent implements OnInit {
     }
   }
 
-  checBoxChange(completed: boolean, name: string): void{
-      for (let i = 0; i < this.statusesTest.length; i++) {
-        if (this.statusesTest[i].name == name) {
-          this.statusesTest[i].state = completed;
-        }
-      }
+  checBoxChange(checked: boolean, name: string): void{
+    if (!checked && this.query.status?.includes(name as Vendor.StatusTypes)) {
+      const index = this.query.status!.indexOf(name as Vendor.StatusTypes);
+      this.query.status.splice(index, 1);
+    } else {
+      this.query.status?.push(name as Vendor.StatusTypes);
     }
+  }
 
   filterApply(): void{
-    this.statusesTest.forEach(element => {
-      if (element.state) {
-        this.query.status?.push(element.name)
-      }
-    });
-
+    this.query.status = [...new Set(this.query.status)];
     this.dialogRef.close(this.query);    
 
   }
 
   filterClear(): void{
     this.query.work_type = [];
-
-    for (let i = 0; i < this.statusesTest.length; i++) {
-      this.statusesTest[i].state = false;
-    }
+    this.query.status = [];
   }
 }

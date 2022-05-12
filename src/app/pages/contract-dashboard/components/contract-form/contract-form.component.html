@@ -148,7 +148,7 @@
             class="delete-button"
         >Delete Contract</button>
     </div>
-    <div class="download-button">
+    <div *ngIf="this.type != 'create'" class="download-button">
         <button
             mat-flat-button
             class="download-pdf"
