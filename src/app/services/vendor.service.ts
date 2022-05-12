@@ -83,7 +83,6 @@ export class VendorService implements IVendorService {
   }
 
   searchVendors(query: SearchVendorsDto): Promise<Vendor[]> {
-    console.log(VENDOR_ROUTES.SEARCH_VENDORS(query))
     return new Promise((resolve, reject) => {
       this.auth.initHeaders();
       this.http

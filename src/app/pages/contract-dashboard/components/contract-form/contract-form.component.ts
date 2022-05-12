@@ -109,8 +109,8 @@ export class ContractFormComponent implements OnInit {
     this.contractService.downloadContract(this.contract);
   }
 
-  deleteContract() {
-    this.contractService.deleteContract(this.contract.vendor.id, this.contract.id);
+  async deleteContract() {
+    await this.contractService.deleteContract(this.contract.vendor.id, this.contract.id);
   }
 
   async contractAction(){

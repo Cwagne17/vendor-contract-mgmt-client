@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { retry } from 'rxjs';
 import { CONTRACT_ROUTES } from '../../environments/routes';
@@ -10,6 +10,7 @@ import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { TableCell, TDocumentDefinitions } from 'pdfmake/interfaces';
 import { PaymentInfo } from '../types/payment-info';
+import { PaymentInfoService } from './payment-info.service';
 
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
 
@@ -22,11 +23,11 @@ export class ContractService implements IContractService {
   constructor(
     private http: HttpClient,
     private auth: AuthService,
+    private paymentService: PaymentInfoService,
     private snackbarService: SnackbarService
   ) {}
   
   createContract(vendorId: string, createContractDto: CreateContractDto): Promise<void> {
-    console.log(createContractDto);
     return new Promise((resolve, reject) => {
       this.auth.initHeaders();
       this.http
@@ -91,23 +92,33 @@ export class ContractService implements IContractService {
   }
 
   deleteContract(vendorId: string, id: string): Promise<void> {
-    return new Promise((resolve, reject) => {
-      this.auth.initHeaders();
-      this.http
-      .delete(
-        CONTRACT_ROUTES.DELETE_CONTRACT(vendorId, id), 
-        { headers: this.auth.headers }
-      )
-      .pipe(retry(3))
-      .toPromise()
-      .then((res: any) => {
-        this.snackbarService.sendSuccessNotification("Payment Info successfully deleted.");
-        resolve(res);
-      },
-      (error) => {
-        this.snackbarService.sendNotificationByError(error);
-        reject(error);
-      });
+    return new Promise(async (resolve, reject) => {
+      const payments = await this.paymentService.getAllPaymentInfo(vendorId, id);
+      if (payments.length > 0) {
+        this.snackbarService.sendNotificationByError(new HttpErrorResponse({
+          error: {
+            message: "Bad Request, payments must be deleted prior to deleting contract."
+          },
+          status: 400
+        }));
+      } else {
+        this.auth.initHeaders();
+        this.http
+        .delete(
+          CONTRACT_ROUTES.DELETE_CONTRACT(vendorId, id), 
+          { headers: this.auth.headers }
+        )
+        .pipe(retry(3))
+        .toPromise()
+        .then((res: any) => {
+          this.snackbarService.sendSuccessNotification("Payment Info successfully deleted.");
+          resolve(res);
+        },
+        (error) => {
+          this.snackbarService.sendNotificationByError(error);
+          reject(error);
+        });
+      }
     });
   }
 

@@ -56,7 +56,6 @@ export class PaymentInfoFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.data);
     if (this.data.paymentInfo) {
       this.paymentInfo = this.data.paymentInfo;
     }

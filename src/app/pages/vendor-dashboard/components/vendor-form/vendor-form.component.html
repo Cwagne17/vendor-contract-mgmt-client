@@ -91,7 +91,7 @@
                         matInput 
                         placeholder="Contact Phone Number"
                         (change)="change($event, 'contact_phone_number')"
-                        [required]="false"
+                        [required]="true"
                         [disabled]="this.disableInput"
                         [value]="vendor.contact_phone_number"
                         (blur)="change($event, 'contact_phone_number')"
