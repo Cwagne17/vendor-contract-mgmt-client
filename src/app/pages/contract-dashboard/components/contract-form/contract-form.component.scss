@@ -1,21 +1,44 @@
 @import 'src/vars';
 .form-row {
     font-size: 12px;
-    
-    mat-form-field {
-        margin-right: 5rem;
-    }
 }
-
+button {
+    width: 150px;
+}
 .memo-input {
     width: 100%;
 }
 
 .button-row {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
 .delete-button {
     color: color-danger()
+}
+.table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+tr.element-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+}
+
+tr.element-row:not(.example-expanded-row):active {
+    background: #efefef;
+}
+
+.download-button {
+    font-size: 12px;
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: right;
+}
+.download-pdf {
+
+    background: color-main("lighter");
+    color: white;
 }

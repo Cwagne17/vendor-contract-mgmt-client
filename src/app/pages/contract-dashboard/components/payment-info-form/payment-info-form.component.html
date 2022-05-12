@@ -7,6 +7,10 @@
             <input 
                 matInput 
                 [matDatepicker]="picker"
+                [value]="paymentInfo.current_date"
+                [disabled]="this.disableInput"
+                (dateInput)="change($event, 'current_date')"
+                (dateChange)="change($event, 'current_date')"
             >
             <mat-hint>YYYY/MM/DD</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -15,12 +19,15 @@
     </div>
 
     <div class="form-row">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="check-number">
             <mat-label>Check Number</mat-label>
             <input
                 matInput
                 [required]="true"
                 [disabled]="this.disableInput"
+                [value]="paymentInfo.check_number"
+                (change)="change($event, 'check_number')"
+                (blur)="change($event, 'check_number')"
             >
         </mat-form-field>
 
@@ -30,22 +37,51 @@
                 matInput
                 [required]="true"
                 [disabled]="this.disableInput"
+                [value]="paymentInfo.amount"
+                (change)="change($event, 'amount')"
+                (blur)="change($event, 'amount')"
             >
         </mat-form-field>
     </div>
 
     <div class="form-row">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="memo-input">
             <mat-label>Memo</mat-label>
             <input
                 matInput
                 [required]="true"
                 [disabled]="this.disableInput"
+                [value]="paymentInfo.memo"
+                (change)="change($event, 'memo')"
+                (blur)="change($event, 'memo')"
             >
         </mat-form-field>
     </div>
 
 
+    <div class="button-row">
+        <button *ngIf="!this.disableInput" 
+            mat-flat-button 
+            mat-dialog-close 
+            color="primary" 
+            type="submit" 
+            (click)="paymentAction()"
+        >{{this.formTitle}}</button>  
 
+        <button *ngIf="this.disableInput" 
+            mat-flat-button 
+            color="primary" 
+            type="submit" 
+            (click)="changeForm('update')"
+        >Update Payment</button>
+
+        <button *ngIf="this.type != 'create'" 
+            mat-flat-button 
+            mat-dialog-close 
+            type="submit" 
+            (click)="deletePayment()"
+            class="delete-button"
+        >Delete Payment</button>
+    </div>
 
 </form>

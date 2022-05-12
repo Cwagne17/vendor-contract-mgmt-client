@@ -108,12 +108,17 @@
             </ng-container>
             
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="openPaymentForm(row)"></tr>
+            <tr mat-row
+                *matRowDef="let row; columns: displayedColumns;" 
+                (click)="openPaymentForm(row)"
+                class="element-row"    
+            ></tr>
         </table>
     </div>
 
     <div class="button-row">
-        <button 
+        <button
+            *ngIf="this.type != 'create'"
             mat-flat-button 
             color="primary" 
             type="submit" 
@@ -135,13 +140,21 @@
             (click)="changeForm('update')"
         >Update Contract</button>
 
-        <button *ngIf="this.type !== 'create'" 
+        <button *ngIf="this.type != 'create'" 
             mat-flat-button 
             mat-dialog-close 
             type="submit" 
             (click)="deleteContract()"
             class="delete-button"
         >Delete Contract</button>
+    </div>
+    <div class="download-button">
+        <button
+            mat-flat-button
+            class="download-pdf"
+            type="submit"
+            (click)="downloadPdf()"
+        >Download PDF</button>
     </div>
 </form>
     

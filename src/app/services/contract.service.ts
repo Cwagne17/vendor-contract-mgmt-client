@@ -6,6 +6,11 @@ import { CreateContractDto, SearchContractsDto, Contract, UpdateContractDto } fr
 import { AuthService } from './auth.service';
 import { IContractService } from './interfaces/icontract.service';
 import { SnackbarService } from './snackbar.service';
+import * as pdfMake from "pdfmake/build/pdfmake";
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+
+(<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
+
 
 @Injectable({
   providedIn: 'root'
@@ -104,8 +109,16 @@ export class ContractService implements IContractService {
     });
   }
 
-  downloadContract(vendorId: string, id: string): void {
-    console.log('method not yet implemented');
+  downloadContract(contract: Contract): void {
+    const docDefinition = {
+      content: [
+        { text: 'test'}
+      ],
+      styles: {
+
+      }
+    };
+    pdfMake.createPdf(docDefinition).download();
   }
 
 

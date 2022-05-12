@@ -34,6 +34,8 @@ export class PaymentInfoFormComponent implements OnInit {
   type: string = '';
   disableInput: boolean = true;
 
+  contractId: string = '';
+  vendorId: string = '';
   paymentInfo: PaymentInfo = {
     id: '',
     amount: 0,
@@ -45,12 +47,24 @@ export class PaymentInfoFormComponent implements OnInit {
 
   constructor(
     private readonly paymentService: PaymentInfoService,
-    @Inject(MAT_DIALOG_DATA) public data: {paymentInfo?: PaymentInfo, action: PaymentInfoForm.Actions}
+    @Inject(MAT_DIALOG_DATA) public data: {
+      paymentInfo?: PaymentInfo,
+      vendorId?: string,
+      contractId?: string,
+      action: PaymentInfoForm.Actions
+    }
   ) {}
 
   ngOnInit(): void {
+    console.log(this.data);
     if (this.data.paymentInfo) {
       this.paymentInfo = this.data.paymentInfo;
+    }
+    if (this.data.contractId) {
+      this.contractId = this.data.contractId;
+    }
+    if (this.data.vendorId) {
+      this.vendorId = this.data.vendorId;
     }
     this.changeForm(this.data.action);
   }
@@ -59,11 +73,11 @@ export class PaymentInfoFormComponent implements OnInit {
     this.type = type;
     switch(this.type){
       case PaymentInfoForm.Actions.CREATE :
-        this.formTitle = "Create Contract";
+        this.formTitle = "Add Payment";
         this.disableInput = false;
         break;
       case PaymentInfoForm.Actions.UPDATE :
-        this.formTitle = "Update Contract";
+        this.formTitle = "Update Payment";
         this.disableInput = false;
         break;
       default:
@@ -75,20 +89,28 @@ export class PaymentInfoFormComponent implements OnInit {
     switch (this.type) {
       case PaymentInfoForm.Actions.CREATE:
         await this.paymentService.createPayment(
-          this.paymentInfo.contract.vendor.id,
-          this.paymentInfo.contract.id,
+          this.vendorId,
+          this.contractId,
           {...this.paymentInfo}
         );
         break;
       case PaymentInfoForm.Actions.UPDATE:
         await this.paymentService.updatePayment(
-          this.paymentInfo.contract.vendor.id,
-          this.paymentInfo.contract.id,
+          this.vendorId,
+          this.contractId,
           this.paymentInfo.id,
           {...this.paymentInfo}
         );
         break;
     }
+  }
+
+  async deletePayment() {
+    await this.paymentService.deletePayment(
+      this.vendorId,
+      this.contractId,
+      this.paymentInfo.id
+    );
   }
 
   change(event: any, property: string) {

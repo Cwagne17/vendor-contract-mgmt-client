@@ -20,6 +20,7 @@ export class PaymentInfoService implements IPaymentInfoService {
 
   createPayment(vendorId: string, contractId: string, createPaymentDto: CreatePaymentInfoDto): Promise<void> {
     return new Promise((resolve, reject) => {
+      console.log(PAYMENT_ROUTES.CREATE_PAYMENT(vendorId, contractId))
       this.auth.initHeaders();
       this.http
       .post(

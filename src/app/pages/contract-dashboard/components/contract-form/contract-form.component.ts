@@ -79,20 +79,34 @@ export class ContractFormComponent implements OnInit {
   }
 
   openPaymentForm(paymentInfo?: PaymentInfo) {
-    const data = paymentInfo ? { paymentInfo: paymentInfo, action: ContractForm.Actions.READ } : { action: ContractForm.Actions.CREATE }; 
+    const data = paymentInfo ? { 
+      paymentInfo: paymentInfo,
+      vendorId: this.contract.vendor.id,
+      contractId: this.contract.id,
+      action: ContractForm.Actions.READ
+    } : { 
+      vendorId: this.contract.vendor.id,
+      contractId: this.contract.id,
+      action: ContractForm.Actions.CREATE
+    };
+     
     const dialogRef = this.dialog.open(
       PaymentInfoFormComponent, {
       data: data
     });
-    dialogRef.afterClosed().subscribe(result => {
-      this.searchPayments();
+    dialogRef.afterClosed().subscribe(async (result) => {
+      await this.searchPayments();
     });
   }
 
-  searchPayments() {
-    this.paymentService.getAllPaymentInfo(this.contract.vendor.id, this.contract.id).then((paymentInfo: PaymentInfo[]) => {
+  async searchPayments() {
+    await this.paymentService.getAllPaymentInfo(this.contract.vendor.id, this.contract.id).then((paymentInfo: PaymentInfo[]) => {
       this.contract.paymentInfo = paymentInfo;
     })
+  }
+
+  downloadPdf() {
+    this.contractService.downloadContract(this.contract);
   }
 
   deleteContract() {
